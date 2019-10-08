@@ -1,5 +1,6 @@
 ## Snaykie
 A very simple snake game was developed as an educational project for C++ Programming language as well as SDL Library.
+<B> A work in progress by Ahmed Debbech. </B>
 #### Installation
 No install intructions are available yet. Comming soon!
 #### Contribution 
