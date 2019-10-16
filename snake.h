@@ -29,5 +29,6 @@ public:
   void setLength(int length);
   float getLength ();
   void showSnake(SDL_Surface * screen);
+  int moveSnake(SDL_Event event);
 };
 #endif

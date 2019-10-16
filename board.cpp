@@ -12,6 +12,13 @@ board :: board(){
   position.x = 0;
   position.y = 0;
   image = IMG_Load("resources/board.png");
+  int count = 0;
+  for(int i = 0; i<18; i++){
+    for(int j = 0; j<12; j++){
+      map[i][j] = count;
+      count++;
+    }
+  }
 }
 void board :: showBoard(SDL_Surface * screen){
   SDL_BlitSurface(this->image, NULL, screen, &position);

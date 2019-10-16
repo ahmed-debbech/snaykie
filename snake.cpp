@@ -52,6 +52,36 @@ void snake :: showSnake(SDL_Surface * screen){
       pos.x = v[i].getX();
       pos.y = v[i].getY();
       SDL_BlitSurface(v[i].getBodyImage(), NULL, screen, &pos);
-      cout << v[i].getBodyImage() << endl;
     }
+}
+int snake :: moveSnake(SDL_Event event){
+  if(event.key.keysym.sym == SDLK_UP){
+    int y = v[0].getY();
+    y = y - 43;
+    v[0].setY(y);
+    return 1;
+  }else{
+    if(event.key.keysym.sym == SDLK_RIGHT){
+      int x = v[0].getX();
+      x = x + 41;
+      v[0].setX(x);
+      return 2;
+    }else{
+      if(event.key.keysym.sym == SDLK_LEFT){
+        int x = v[0].getX();
+        x = x - 41;
+        v[0].setX(x);
+        return 3;
+      }else{
+        if(event.key.keysym.sym == SDLK_DOWN){
+          int y = v[0].getY();
+          y = y + 43;
+          v[0].setY(y);
+          return 4;
+        }else{
+          return -1;
+        }
+      }
+    }
+  }
 }

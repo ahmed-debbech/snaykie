@@ -23,7 +23,21 @@ int main (int argc, char **argv){
   bd.showBoard(screen);
   sn.showSnake(screen);
   SDL_Flip(screen);
+  int mouvement = -1;
   while(game_done == false){
+    SDL_Event event;
+    SDL_WaitEvent(&event);
+      switch(event.type){
+        case SDL_QUIT: // to quit the game
+          game_done = true;
+          break;
+        case SDL_KEYDOWN:
+          mouvement = sn.moveSnake(event);
+          bd.showBoard(screen);
+          sn.showSnake(screen);
+          SDL_Flip(screen);
+          break;
+      }
   }
   SDL_FreeSurface(screen);
   SDL_Quit();
