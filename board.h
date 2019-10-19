@@ -14,9 +14,10 @@ class board{
   SDL_Rect position;
   SDL_Surface * image;
   int map[18][12];
+  int pos_head_snake_on_map;
 public:
   board();
-
   void showBoard(SDL_Surface * screen);
 };
+
 #endif

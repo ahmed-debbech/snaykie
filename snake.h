@@ -12,14 +12,20 @@ using namespace std;
 class node{
   SDL_Rect position;
   SDL_Surface * body;
+  char dir;
 public:
   void setX(float x);
   float getX();
   void setY(float y);
   float getY();
+  char getDirection();
+  void setDirection(char dir);
   void setBodyImage(SDL_Surface * body);
   SDL_Surface * getBodyImage();
 };
+
+
+
 class snake{
   int length;
   SDL_Surface * head;

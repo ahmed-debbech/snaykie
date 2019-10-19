@@ -11,6 +11,7 @@ using namespace std;
 board :: board(){
   position.x = 0;
   position.y = 0;
+  pos_head_snake_on_map = 213;
   image = IMG_Load("resources/board.png");
   int count = 0;
   for(int i = 0; i<18; i++){
