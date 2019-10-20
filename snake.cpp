@@ -42,11 +42,11 @@ float snake :: getLength (){
 
 snake :: snake(){
    int i;
-  float x = 388.4;
+  float x = 305.4;
   float y = 778.4;
-  length = 3;
+  length = 5;
   SDL_Surface * body = IMG_Load("resources/body.png");
-  for(i = 1; i <= 3; i++){
+  for(i = 0; i <= length-1; i++){
     node n;
     n.setX(x);
     n.setY(y);
@@ -59,47 +59,19 @@ snake :: snake(){
 void snake :: showSnake(SDL_Surface * screen){
     for(int i = 0; i<= length-1; i++){
       SDL_Rect pos;
+      cout << v[i].getDirection() << endl;
       pos.x = v[i].getX();
       pos.y = v[i].getY();
       SDL_BlitSurface(v[i].getBodyImage(), NULL, screen, &pos);
     }
 }
 int snake :: moveSnake(SDL_Event event){
+  int y,x;
   if(event.key.keysym.sym == SDLK_UP){
-    int y;
-    int nodes_counter = 0; bool test = false;
-      while((test == false) && (nodes_counter <= length-1)){
-          if(v[nodes_counter].getDirection() == 'u'){
-             y = v[nodes_counter].getY();
-            y = y - 43;
-            v[nodes_counter].setY(y);
-          }else{
-            v[nodes_counter].setDirection('u');
-             y = v[nodes_counter].getY();
-            y = y - 43;
-            v[nodes_counter].setY(y);
-            test = true;
-          }
-          nodes_counter++;
-      }
-      for(int i = nodes_counter; i<=length-1; i++){
-          switch(v[i].getDirection()){
-            case 'r':
-            v[i].setDirection('u');
-             y = v[i].getY();
-            y = y - 43;
-            v[i].setY(y);
-            test = true;
-              break;
-            case 'l':
-            v[i].setDirection('u');
-            y = v[i].getY();
-            y = y - 43;
-            v[i].setY(y);
-            test = true;
-              break;
-          }
-      }
+    v[0].setDirection('u');
+    y = v[0].getY();
+    y = y - 43;
+    v[0].setY(y);
     return 1;
   }else{
     if(event.key.keysym.sym == SDLK_RIGHT){
@@ -123,6 +95,12 @@ int snake :: moveSnake(SDL_Event event){
           return -1;
         }
       }
+    }
+  }
+  for(int i = 1; i <= length-1; i++){
+    switch(v[i-1].getDirection()){
+      case 'u':
+        break;
     }
   }
 }
