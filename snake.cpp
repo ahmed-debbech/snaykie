@@ -31,6 +31,13 @@ char node :: getDirection(){
 void node :: setDirection(char dir){
   this->dir = dir;
 }
+char node :: getNextDirection(){
+  return this->nextDir;
+}
+void node :: setNextDirection(char nextDir){
+  this->nextDir = nextDir;
+}
+
 
 
 void snake :: setLength(int length){
@@ -47,13 +54,25 @@ snake :: snake(){
   length = 5;
   SDL_Surface * body = IMG_Load("resources/body.png");
   for(i = 0; i <= length-1; i++){
-    node n;
-    n.setX(x);
-    n.setY(y);
-    n.setBodyImage(body);
-    n.setDirection('o');
-    v.push_back(n);
-    x = x + 41;
+    if(i == 0){
+      node n;
+      n.setX(x);
+      n.setY(y);
+      n.setBodyImage(body);
+      n.setDirection('l');
+      n.setNextDirection('h');
+      v.push_back(n);
+      x = x + 41;
+    }else{
+      node n;
+      n.setX(x);
+      n.setY(y);
+      n.setBodyImage(body);
+      n.setDirection('l');
+      n.setNextDirection('l');
+      v.push_back(n);
+      x = x + 41;
+    }
   }
 }
 void snake :: showSnake(SDL_Surface * screen){
@@ -66,41 +85,65 @@ void snake :: showSnake(SDL_Surface * screen){
     }
 }
 int snake :: moveSnake(SDL_Event event){
-  int y,x;
+  int y,x,z;
   if(event.key.keysym.sym == SDLK_UP){
     v[0].setDirection('u');
     y = v[0].getY();
     y = y - 43;
     v[0].setY(y);
-    return 1;
+    z=1;
   }else{
     if(event.key.keysym.sym == SDLK_RIGHT){
-      int x = v[0].getX();
+      v[0].setDirection('r');
+      x = v[0].getX();
       x = x + 41;
       v[0].setX(x);
-      return 2;
+      z =2;
     }else{
       if(event.key.keysym.sym == SDLK_LEFT){
-        int x = v[0].getX();
+        v[0].setDirection('l');
+        x = v[0].getX();
         x = x - 41;
         v[0].setX(x);
-        return 3;
+        z=3;
       }else{
         if(event.key.keysym.sym == SDLK_DOWN){
-          int y = v[0].getY();
+          v[0].setDirection('d');
+          y = v[0].getY();
           y = y + 43;
           v[0].setY(y);
-          return 4;
+          z=4;
         }else{
-          return -1;
+          z =-1;
         }
       }
     }
   }
   for(int i = 1; i <= length-1; i++){
-    switch(v[i-1].getDirection()){
+    v[i].setDirection(v[i].getNextDirection());
+    switch(v[i].getDirection()){
       case 'u':
+      y = v[i].getY();
+      y = y - 43;
+      v[i].setY(y);
+        break;
+      case 'r':
+      x = v[i].getX();
+      x = x + 41;
+      v[i].setX(x);
+        break;
+      case 'l':
+      x = v[i].getX();
+      x = x - 41;
+      v[i].setX(x);
+        break;
+      case 'd':
+      y = v[i].getY();
+      y = y + 43;
+      v[i].setY(y);
         break;
     }
+    v[i].setNextDirection(v[i-1].getDirection());
   }
+  return z;
 }

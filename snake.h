@@ -13,12 +13,15 @@ class node{
   SDL_Rect position;
   SDL_Surface * body;
   char dir;
+  char nextDir;
 public:
   void setX(float x);
   float getX();
   void setY(float y);
   float getY();
   char getDirection();
+  void setNextDirection(char nextDir);
+  char getNextDirection();
   void setDirection(char dir);
   void setBodyImage(SDL_Surface * body);
   SDL_Surface * getBodyImage();
