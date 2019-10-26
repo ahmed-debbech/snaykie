@@ -49,9 +49,9 @@ float snake :: getLength (){
 
 snake :: snake(){
    int i;
-  float x = 305.4;
+  float x = 387.4;
   float y = 778.4;
-  length = 5;
+  length = 3;
   SDL_Surface * body = IMG_Load("resources/body.png");
   for(i = 0; i <= length-1; i++){
     if(i == 0){

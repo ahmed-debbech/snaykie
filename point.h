@@ -1,5 +1,5 @@
-#ifndef SNAKE_H
-#define SNAKE_H
+#ifndef POINT_H
+#define POINT_H
 
 #include <iostream>
 #include "SDL/SDL_image.h"
@@ -10,9 +10,12 @@ using namespace std;
 
 class point{
   int num_point_on_board;
+  SDL_Surface * pointImg;
+  SDL_Rect pointPos;
 public:
+  point();
   int getPointNum(){return this->num_point_on_board;}
-  void setPointNum(int num){this->num_point_on_board = num;}
-
+  void showPoint(SDL_Rect pos, SDL_Surface * screen);
+  ~point();
 };
 #endif

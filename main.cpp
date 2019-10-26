@@ -3,10 +3,9 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 #include "SDL/SDL_ttf.h"
-#include <list>
-#include <iterator>
 #include "snake.h"
 #include "board.h"
+#include "point.h"
 using namespace std;
 
 int main (int argc, char **argv){
@@ -22,6 +21,10 @@ int main (int argc, char **argv){
   board bd;
   bd.showBoard(screen);
   sn.showSnake(screen);
+  point * po = new point;
+  bd.setPointPos(po->getPointNum());
+  SDL_Rect pointPos = bd.get_right_pos_on_map();
+  po->showPoint(pointPos,screen);
   SDL_Flip(screen);
   int mouvement = -1;
   while(game_done == false){
