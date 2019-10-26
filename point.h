@@ -6,11 +6,13 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 #include "SDL/SDL_ttf.h"
-#include <vector>
-#include <iterator>
 using namespace std;
 
 class point{
-  
+  int num_point_on_board;
+public:
+  int getPointNum(){return this->num_point_on_board;}
+  void setPointNum(int num){this->num_point_on_board = num;}
+
 };
 #endif
