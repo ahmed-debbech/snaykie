@@ -38,6 +38,7 @@ int main (int argc, char **argv){
           mouvement = sn.moveSnake(event);
           bd.showBoard(screen);
           sn.showSnake(screen);
+          po->showPoint(pointPos, screen);
           SDL_Flip(screen);
           break;
       }

@@ -17,6 +17,7 @@ board :: board(){
   int x = 13;
   int y = 50;
   for(int i = 0; i<18; i++){
+    x = 13;
     for(int j = 0; j<12; j++){
       m[i][j].num = count;
       count++;
@@ -28,19 +29,15 @@ board :: board(){
   }
 }
 SDL_Rect board :: get_right_pos_on_map(){
-  int i,j; SDL_Rect pos; int test = 0;
-  while((i<18) && (test == 0)){
-    while((j<12) && (test == 0)){
+  int i=0,j=0; SDL_Rect pos;
+  for(int i = 0; i<18; i++){
+    for(int j = 0; j<12; j++){
       if(m[i][j].num == this->pointImgPos){
         pos.x = m[i][j].x;
         pos.y = m[i][j].y;
-        test = 1;
         return pos;
-      }else{
-        j++;
       }
     }
-    i++;
   }
   pos.x=-1; pos.y=-1;
   return pos;
