@@ -53,12 +53,13 @@ snake :: snake(){
   float y = 778.4;
   length = 3;
   SDL_Surface * body = IMG_Load("resources/body.png");
+  SDL_Surface * head = IMG_Load("resources/head.png");
   for(i = 0; i <= length-1; i++){
     if(i == 0){
       node n;
       n.setX(x);
       n.setY(y);
-      n.setBodyImage(body);
+      n.setBodyImage(head);
       n.setDirection('l');
       n.setNextDirection('h');
       v.push_back(n);
