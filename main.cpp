@@ -27,21 +27,38 @@ int main (int argc, char **argv){
   po->showPoint(pointPos,screen);
   SDL_Flip(screen);
   int mouvement = -1;
+  SDL_Event event;
   while(game_done == false){
-    SDL_Event event;
-    SDL_WaitEvent(&event);
+    SDL_PollEvent(&event);
       switch(event.type){
         case SDL_QUIT: // to quit the game
           game_done = true;
           break;
         case SDL_KEYDOWN:
-          mouvement = sn.moveSnake(event);
-          bd.showBoard(screen);
-          sn.showSnake(screen);
-          po->showPoint(pointPos, screen);
-          SDL_Flip(screen);
+        if(event.key.keysym.sym == SDLK_RIGHT){
+          event.key.keysym.sym = SDLK_RIGHT;
+        }else{
+          if(event.key.keysym.sym == SDLK_LEFT){
+            event.key.keysym.sym = SDLK_LEFT;
+          }else{
+            if(event.key.keysym.sym == SDLK_DOWN){
+              event.key.keysym.sym = SDLK_DOWN;
+            }else{
+              if(event.key.keysym.sym == SDLK_UP){
+                event.key.keysym.sym = SDLK_UP;
+              }
+            }
+          }
+        }
           break;
       }
+      mouvement = sn.moveSnake(event);
+      bd.showBoard(screen);
+      sn.showSnake(screen);
+      po->showPoint(pointPos, screen);
+      SDL_Flip(screen);
+      SDL_Delay(250);
+      while(SDL_PollEvent(&event) != 0);
   }
   SDL_FreeSurface(screen);
   SDL_Quit();
