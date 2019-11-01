@@ -27,8 +27,6 @@ public:
   SDL_Surface * getBodyImage();
 };
 
-
-
 class snake{
   int length;
   SDL_Surface * head;
@@ -38,6 +36,6 @@ public:
   void setLength(int length);
   float getLength ();
   void showSnake(SDL_Surface * screen);
-  int moveSnake(SDL_Event event);
+  void moveSnake(SDL_Event event);
 };
 #endif

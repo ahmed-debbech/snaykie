@@ -35,24 +35,24 @@ int main (int argc, char **argv){
           game_done = true;
           break;
         case SDL_KEYDOWN:
-        if(event.key.keysym.sym == SDLK_RIGHT){
-          event.key.keysym.sym = SDLK_RIGHT;
-        }else{
-          if(event.key.keysym.sym == SDLK_LEFT){
-            event.key.keysym.sym = SDLK_LEFT;
-          }else{
-            if(event.key.keysym.sym == SDLK_DOWN){
-              event.key.keysym.sym = SDLK_DOWN;
+            if(event.key.keysym.sym == SDLK_RIGHT){
+              event.key.keysym.sym = SDLK_RIGHT;
             }else{
-              if(event.key.keysym.sym == SDLK_UP){
-                event.key.keysym.sym = SDLK_UP;
+              if(event.key.keysym.sym == SDLK_LEFT){
+                event.key.keysym.sym = SDLK_LEFT;
+              }else{
+                if(event.key.keysym.sym == SDLK_DOWN){
+                  event.key.keysym.sym = SDLK_DOWN;
+                }else{
+                  if(event.key.keysym.sym == SDLK_UP){
+                    event.key.keysym.sym = SDLK_UP;
+                  }
+                }
               }
             }
-          }
-        }
           break;
       }
-      mouvement = sn.moveSnake(event);
+      sn.moveSnake(event);
       bd.showBoard(screen);
       sn.showSnake(screen);
       po->showPoint(pointPos, screen);
