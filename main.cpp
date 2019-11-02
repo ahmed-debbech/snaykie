@@ -28,6 +28,7 @@ int main (int argc, char **argv){
   SDL_Flip(screen);
   int mouvement = -1;
   SDL_Event event;
+  SDL_Event holder;
   while(game_done == false){
     SDL_PollEvent(&event);
       switch(event.type){
@@ -37,19 +38,30 @@ int main (int argc, char **argv){
         case SDL_KEYDOWN:
             if(event.key.keysym.sym == SDLK_RIGHT){
               event.key.keysym.sym = SDLK_RIGHT;
+              holder = event;
             }else{
               if(event.key.keysym.sym == SDLK_LEFT){
                 event.key.keysym.sym = SDLK_LEFT;
+                holder = event;
               }else{
-                if(event.key.keysym.sym == SDLK_DOWN){
-                  event.key.keysym.sym = SDLK_DOWN;
+                if(event.key.keysym.sym == SDLK_UP){
+                  event.key.keysym.sym = SDLK_UP;
+                  holder = event;
                 }else{
-                  if(event.key.keysym.sym == SDLK_UP){
-                    event.key.keysym.sym = SDLK_UP;
+                  if(event.key.keysym.sym == SDLK_DOWN){
+                    event.key.keysym.sym = SDLK_DOWN;
+                    holder = event;
+                  }else{
+                    while(SDL_PollEvent(&event) != 0);
+                    event = holder;
+                    cout << event.key.keysym.sym << endl;
                   }
                 }
               }
             }
+          break;
+          case SDL_MOUSEBUTTONDOWN:
+          while(SDL_PollEvent(&event) != 0);
           break;
       }
       sn.moveSnake(event);

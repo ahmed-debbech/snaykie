@@ -87,32 +87,64 @@ void snake :: showSnake(SDL_Surface * screen){
 void snake :: moveSnake(SDL_Event event){
   int y,x, z ;
   if(event.key.keysym.sym == SDLK_UP){
-    v[0].setDirection('u');
-    y = v[0].getY();
-    y = y - 43;
-    v[0].setY(y);
-    z =1;
-  }else{
-    if(event.key.keysym.sym == SDLK_RIGHT){
-      v[0].setDirection('r');
-      x = v[0].getX();
-      x = x + 41;
-      v[0].setX(x);
+    if(v[0].getDirection() != 'd'){
+      v[0].setDirection('u');
+      y = v[0].getY();
+      y = y - 43;
+      v[0].setY(y);
       z =1;
     }else{
-      if(event.key.keysym.sym == SDLK_LEFT){
+      v[0].setDirection('d');
+      y = v[0].getY();
+      y = y + 43;
+      v[0].setY(y);
+      z =1;
+    }
+  }else{
+    if(event.key.keysym.sym == SDLK_RIGHT){
+      if(v[0].getDirection() != 'l'){
+        v[0].setDirection('r');
+        x = v[0].getX();
+        x = x + 41;
+        v[0].setX(x);
+        z =1;
+      }else{
         v[0].setDirection('l');
         x = v[0].getX();
         x = x - 41;
         v[0].setX(x);
         z =1;
+      }
+    }else{
+      if(event.key.keysym.sym == SDLK_LEFT){
+        if(v[0].getDirection() != 'r'){
+          v[0].setDirection('l');
+          x = v[0].getX();
+          x = x - 41;
+          v[0].setX(x);
+          z =1;
+        }else{
+          v[0].setDirection('r');
+          x = v[0].getX();
+          x = x + 41;
+          v[0].setX(x);
+          z =1;
+        }
       }else{
         if(event.key.keysym.sym == SDLK_DOWN){
-          v[0].setDirection('d');
-          y = v[0].getY();
-          y = y + 43;
-          v[0].setY(y);
-          z =1;
+          if(v[0].getDirection() != 'u'){
+            v[0].setDirection('d');
+            y = v[0].getY();
+            y = y + 43;
+            v[0].setY(y);
+            z =1;
+          }else{
+            v[0].setDirection('u');
+            y = v[0].getY();
+            y = y - 43;
+            v[0].setY(y);
+            z =1;
+          }
         }else{
           z =-1;
         }
@@ -146,7 +178,5 @@ void snake :: moveSnake(SDL_Event event){
     }
     v[i].setNextDirection(v[i-1].getDirection());
   }
-}else{
-
 }
 }
