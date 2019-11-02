@@ -28,33 +28,28 @@ int main (int argc, char **argv){
   SDL_Flip(screen);
   int mouvement = -1;
   SDL_Event event;
-  SDL_Event holder;
+  SDL_Event event_holder;
   while(game_done == false){
+    event = event_holder;
     SDL_PollEvent(&event);
       switch(event.type){
         case SDL_QUIT: // to quit the game
           game_done = true;
           break;
-        case SDL_KEYDOWN:
-            if(event.key.keysym.sym == SDLK_RIGHT){
-              event.key.keysym.sym = SDLK_RIGHT;
-              holder = event;
+          case SDL_KEYDOWN:
+             if(event.key.keysym.sym == SDLK_RIGHT){
+              event_holder = event;
             }else{
               if(event.key.keysym.sym == SDLK_LEFT){
-                event.key.keysym.sym = SDLK_LEFT;
-                holder = event;
+                event_holder = event;
               }else{
                 if(event.key.keysym.sym == SDLK_UP){
-                  event.key.keysym.sym = SDLK_UP;
-                  holder = event;
+                  event_holder =event;
                 }else{
                   if(event.key.keysym.sym == SDLK_DOWN){
-                    event.key.keysym.sym = SDLK_DOWN;
-                    holder = event;
+                    event_holder =event;
                   }else{
-                    while(SDL_PollEvent(&event) != 0);
-                    event = holder;
-                    cout << event.key.keysym.sym << endl;
+                    event = event_holder;
                   }
                 }
               }
@@ -62,15 +57,20 @@ int main (int argc, char **argv){
           break;
           case SDL_MOUSEBUTTONDOWN:
           while(SDL_PollEvent(&event) != 0);
+          event = event_holder;
+          break;
+          case SDL_MOUSEMOTION:
+          while(SDL_PollEvent(&event) != 0);
+          event = event_holder;
           break;
       }
+      while(SDL_PollEvent(&event) != 0);
       sn.moveSnake(event);
       bd.showBoard(screen);
       sn.showSnake(screen);
       po->showPoint(pointPos, screen);
       SDL_Flip(screen);
       SDL_Delay(250);
-      while(SDL_PollEvent(&event) != 0);
   }
   SDL_FreeSurface(screen);
   SDL_Quit();
