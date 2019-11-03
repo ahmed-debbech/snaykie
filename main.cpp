@@ -75,15 +75,10 @@ int main (int argc, char **argv){
       po->showPoint(pointPos, screen);
       //check for winning
       if(arb.eat_check(bd.getSnakeHeadPos(), po->getPointNum()) == true){
-        cout << "equal!" << endl;
         delete po;
-        cout << po << endl;
         po = new point;
-        cout << po << endl;
-        bd.showBoard(screen);
-        sn.showSnake(screen);
+        bd.setPointPos(po->getPointNum());
         pointPos = bd.get_right_pos_on_map();
-        po->showPoint(pointPos, screen);
       }
       SDL_Flip(screen);
       SDL_Delay(250);
