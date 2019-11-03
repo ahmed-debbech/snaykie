@@ -32,7 +32,7 @@ int main (int argc, char **argv){
   SDL_Event event;
   SDL_Event event_holder;
   while(game_done == false){
-    event = event_holder;
+    //event = event_holder;
     SDL_PollEvent(&event);
       switch(event.type){
         case SDL_QUIT: // to quit the game
