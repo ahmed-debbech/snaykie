@@ -6,6 +6,7 @@
 #include "snake.h"
 #include "board.h"
 #include "point.h"
+#include "arbitrator.h"
 using namespace std;
 
 int main (int argc, char **argv){
@@ -19,6 +20,7 @@ int main (int argc, char **argv){
   bool game_done = false;
   snake sn;
   board bd;
+
   bd.showBoard(screen);
   sn.showSnake(screen);
   point * po = new point;
