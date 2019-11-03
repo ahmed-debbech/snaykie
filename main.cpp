@@ -20,7 +20,7 @@ int main (int argc, char **argv){
   bool game_done = false;
   snake sn;
   board bd;
-
+  arbitrator arb;
   bd.showBoard(screen);
   sn.showSnake(screen);
   point * po = new point;
@@ -67,10 +67,24 @@ int main (int argc, char **argv){
           break;
       }
       while(SDL_PollEvent(&event) != 0);
-      sn.moveSnake(event);
+      int dir;
+      dir = sn.moveSnake(event);
+      bd.setSnakeHeadPos(dir);
       bd.showBoard(screen);
       sn.showSnake(screen);
       po->showPoint(pointPos, screen);
+      //check for winning
+      if(arb.eat_check(bd.getSnakeHeadPos(), po->getPointNum()) == true){
+        cout << "equal!" << endl;
+        delete po;
+        cout << po << endl;
+        po = new point;
+        cout << po << endl;
+        bd.showBoard(screen);
+        sn.showSnake(screen);
+        pointPos = bd.get_right_pos_on_map();
+        po->showPoint(pointPos, screen);
+      }
       SDL_Flip(screen);
       SDL_Delay(250);
   }

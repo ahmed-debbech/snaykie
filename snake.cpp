@@ -84,7 +84,7 @@ void snake :: showSnake(SDL_Surface * screen){
       SDL_BlitSurface(v[i].getBodyImage(), NULL, screen, &pos);
     }
 }
-void snake :: moveSnake(SDL_Event event){
+int snake :: moveSnake(SDL_Event event){
   int y,x, z ;
   if(event.key.keysym.sym == SDLK_UP){
     if(v[0].getDirection() != 'd'){
@@ -98,7 +98,7 @@ void snake :: moveSnake(SDL_Event event){
       y = v[0].getY();
       y = y + 43;
       v[0].setY(y);
-      z =1;
+      z =4;
     }
   }else{
     if(event.key.keysym.sym == SDLK_RIGHT){
@@ -107,13 +107,13 @@ void snake :: moveSnake(SDL_Event event){
         x = v[0].getX();
         x = x + 41;
         v[0].setX(x);
-        z =1;
+        z =2;
       }else{
         v[0].setDirection('l');
         x = v[0].getX();
         x = x - 41;
         v[0].setX(x);
-        z =1;
+        z =3;
       }
     }else{
       if(event.key.keysym.sym == SDLK_LEFT){
@@ -122,13 +122,13 @@ void snake :: moveSnake(SDL_Event event){
           x = v[0].getX();
           x = x - 41;
           v[0].setX(x);
-          z =1;
+          z =3;
         }else{
           v[0].setDirection('r');
           x = v[0].getX();
           x = x + 41;
           v[0].setX(x);
-          z =1;
+          z =2;
         }
       }else{
         if(event.key.keysym.sym == SDLK_DOWN){
@@ -137,7 +137,7 @@ void snake :: moveSnake(SDL_Event event){
             y = v[0].getY();
             y = y + 43;
             v[0].setY(y);
-            z =1;
+            z =4;
           }else{
             v[0].setDirection('u');
             y = v[0].getY();
@@ -159,7 +159,7 @@ void snake :: moveSnake(SDL_Event event){
       y = v[i].getY();
       y = y - 43;
       v[i].setY(y);
-        break;
+      break;
       case 'r':
       x = v[i].getX();
       x = x + 41;
@@ -179,4 +179,5 @@ void snake :: moveSnake(SDL_Event event){
     v[i].setNextDirection(v[i-1].getDirection());
   }
 }
+return z;
 }

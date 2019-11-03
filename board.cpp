@@ -45,3 +45,19 @@ SDL_Rect board :: get_right_pos_on_map(){
 void board :: showBoard(SDL_Surface * screen){
   SDL_BlitSurface(this->image, NULL, screen, &position);
 }
+void board :: setSnakeHeadPos(int dir){
+  switch(dir){
+    case 1:
+    pos_head_snake_on_map -=12;
+    break;
+    case 2:
+    pos_head_snake_on_map ++;
+    break;
+    case 3:
+    pos_head_snake_on_map --;
+    break;
+    case 4:
+    pos_head_snake_on_map +=12;
+    break;
+  }
+}

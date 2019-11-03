@@ -35,7 +35,6 @@ void arbitrator :: print_points_on_board(SDL_Surface * screen){
         value=TTF_RenderText_Solid(police, ch, color);
         TTF_CloseFont(police);
         TTF_Quit();
-        fclose(f)
       }
       valuePos.x = 96;
       valuePos.y = 13;

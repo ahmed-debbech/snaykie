@@ -12,7 +12,6 @@ point :: point(){
   this->pointImg = IMG_Load("resources/point.png");
   srand(time(0));
     this->num_point_on_board = (rand() % 215) + 0;
-    cout << this->num_point_on_board << endl;
 }
 point :: ~point(){
   //increment the points text;
