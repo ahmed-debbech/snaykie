@@ -24,11 +24,11 @@ void arbitrator :: print_points_on_board(SDL_Surface * screen){
     SDL_Surface *value = NULL;
     SDL_Rect valuePos;
     TTF_Font *police = NULL;
-    SDL_Color color = {230, 0, 0};
+    SDL_Color color = {220, 20, 60};
     if (TTF_Init() < 0) {
       printf("Error openning ttf\n");
     }else{
-      police = TTF_OpenFont("resources/font.ttf", 20);
+      police = TTF_OpenFont("resources/font.ttf", 30);
       if (police == NULL) {
         printf("Error in opening font file\n");
       }else{
@@ -38,7 +38,7 @@ void arbitrator :: print_points_on_board(SDL_Surface * screen){
         TTF_Quit();
       }
       valuePos.x = 96;
-      valuePos.y = 13;
+      valuePos.y = 2;
       SDL_BlitSurface(value, NULL, screen, &valuePos);
     }
 }

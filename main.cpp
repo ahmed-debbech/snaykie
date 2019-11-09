@@ -27,6 +27,7 @@ int main (int argc, char **argv){
   bd.setPointPos(po->getPointNum());
   SDL_Rect pointPos = bd.get_right_pos_on_map();
   po->showPoint(pointPos,screen);
+  arb.print_points_on_board(screen);
   SDL_Flip(screen);
   int mouvement = -1;
   SDL_Event event;
@@ -72,6 +73,7 @@ int main (int argc, char **argv){
       bd.showBoard(screen);
       sn.showSnake(screen);
       po->showPoint(pointPos, screen);
+      arb.print_points_on_board(screen);
       //check for winning
       if(arb.eat_check(bd.getSnakeHeadPos(), po->getPointNum()) == true){
         delete po;
@@ -80,6 +82,7 @@ int main (int argc, char **argv){
         pointPos = bd.get_right_pos_on_map();
         sn.addExtraBody();
         sn.setLength(sn.getLength() + 1);
+        arb.update_points();
       }else{
         if(arb.crash_board_check(bd.getSnakeHeadPos()) == true){
           arb.print_gameover(screen);
