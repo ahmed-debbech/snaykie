@@ -66,7 +66,6 @@ int main (int argc, char **argv){
           event = event_holder;
           break;
       }
-      while(SDL_PollEvent(&event) != 0);
       int dir;
       dir = sn.moveSnake(event);
       bd.setSnakeHeadPos(dir);
@@ -79,9 +78,12 @@ int main (int argc, char **argv){
         po = new point;
         bd.setPointPos(po->getPointNum());
         pointPos = bd.get_right_pos_on_map();
+        sn.addExtraBody();
+        sn.setLength(sn.getLength() + 1);
       }
       SDL_Flip(screen);
       SDL_Delay(250);
+      while(SDL_PollEvent(&event) != 0);
   }
   SDL_FreeSurface(screen);
   SDL_Quit();

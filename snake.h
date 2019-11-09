@@ -35,6 +35,7 @@ public:
   snake();
   void setLength(int length);
   float getLength ();
+  void addExtraBody();
   void showSnake(SDL_Surface * screen);
   int moveSnake(SDL_Event event);
 };
