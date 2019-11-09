@@ -184,28 +184,22 @@ return z;
 void snake :: addExtraBody(){
   node n,last;
   n.setBodyImage(IMG_Load("resources/body.png"));
-  cout << "len: " << length << endl;
   last=v[length-1];
-  cout << "last x " << last.getX() << endl;
   n.setNextDirection(last.getDirection());
   n.setDirection(last.getDirection());
   switch(n.getDirection()){
     case 'u': n.setY(last.getY() + 43);
               n.setX(last.getX());
     break;
-    case 'l': n.setX(last.getX() - 41);
+    case 'l': n.setX(last.getX() + 41);
               n.setY(last.getY());
     break;
-    case 'r': n.setX(last.getX() + 41);
+    case 'r': n.setX(last.getX() - 41);
               n.setY(last.getY());
     break;
     case 'd': n.setY(last.getY() - 43);
               n.setX(last.getX());
     break;
   }
-  cout << "pos point: " << n.getBodyImage() << endl;
-  cout << "pos x,y" << n.getX() << " " << n.getY() << endl;
-  cout << " dir: " << n.getDirection() << endl;
-  cout << "next dir " << n.getNextDirection() << endl;
   v.push_back(n);
 }
