@@ -80,6 +80,13 @@ int main (int argc, char **argv){
         pointPos = bd.get_right_pos_on_map();
         sn.addExtraBody();
         sn.setLength(sn.getLength() + 1);
+      }else{
+        if(arb.crash_board_check(bd.getSnakeHeadPos()) == true){
+          arb.print_gameover(screen);
+          SDL_Flip(screen);
+          SDL_Delay(3000);
+          game_done = true;
+        }
       }
       SDL_Flip(screen);
       SDL_Delay(250);

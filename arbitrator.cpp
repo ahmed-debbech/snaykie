@@ -10,6 +10,7 @@ using namespace std;
 
 arbitrator :: arbitrator(){
   pointScore = 0;
+  gameover = IMG_Load("resources/gameover.png");
 }
 bool arbitrator :: eat_check(int snake_pos, int point_pos){
   if(snake_pos == point_pos){
@@ -43,4 +44,21 @@ void arbitrator :: print_points_on_board(SDL_Surface * screen){
 }
 void arbitrator :: update_points(){
   pointScore++;
+}
+void arbitrator :: print_gameover(SDL_Surface * screen){
+  SDL_Rect pos;
+  pos.x = 112;
+  pos.y = 277;
+  pos.h = gameover->h;
+  pos.w = gameover->w;
+    SDL_BlitSurface(gameover, NULL, screen, &pos);
+}
+bool arbitrator :: crash_board_check(int snake_pos){
+    bool test = false;
+    if((snake_pos < 0) || (snake_pos > 215)){
+      test = true;
+    }else{
+      test = false;
+    }
+    return test;
 }

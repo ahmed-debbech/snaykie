@@ -9,9 +9,15 @@
 using namespace std;
 
 point :: point(){
+  static bool first_time = true;
   this->pointImg = IMG_Load("resources/point.png");
   srand(time(0));
+  if(first_time = true){
+    this->num_point_on_board = (rand() % 200) + 0;
+    first_time = false;
+  }else{
     this->num_point_on_board = (rand() % 215) + 0;
+  }
 }
 point :: ~point(){
   //increment the points text;
