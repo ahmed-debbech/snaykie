@@ -8,6 +8,7 @@
 #include "SDL/SDL_ttf.h"
 #include <vector>
 #include <iterator>
+#include "board.h"
 using namespace std;
 
 class arbitrator{
@@ -16,10 +17,10 @@ class arbitrator{
 public:
   arbitrator();
   bool eat_check(int snake_pos, int point_pos);
-  bool crash_board_check(int snake_pos);
   void print_points_on_board(SDL_Surface * screen);
   void update_points();
   void print_gameover(SDL_Surface * screen);
+  bool detectCollWithBoard(board&);
 };
 
 

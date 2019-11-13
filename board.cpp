@@ -28,8 +28,8 @@ board :: board(){
     y = y + 43;
   }
 }
-SDL_Rect board :: get_right_pos_on_map(){
-  int i=0,j=0; SDL_Rect pos;
+SDL_Rect board :: get_xy_point_on_map(){
+   SDL_Rect pos;
   for(int i = 0; i<18; i++){
     for(int j = 0; j<12; j++){
       if(m[i][j].num == this->pointImgPos){
@@ -60,4 +60,18 @@ void board :: setSnakeHeadPos(int dir){
     pos_head_snake_on_map +=12;
     break;
   }
+}
+SDL_Rect board :: get_xy_snake_head_on_map(){
+    SDL_Rect pos;
+    for(int i = 0; i<18; i++){
+     for(int j = 0; j<12; j++){
+       if(m[i][j].num == this->pos_head_snake_on_map){
+         pos.x = m[i][j].x;
+         pos.y = m[i][j].y;
+         return pos;
+       }
+     }
+   }
+   pos.x=-1; pos.y=-1;
+   return pos;
 }

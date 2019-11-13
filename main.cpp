@@ -25,7 +25,7 @@ int main (int argc, char **argv){
   sn.showSnake(screen);
   point * po = new point;
   bd.setPointPos(po->getPointNum());
-  SDL_Rect pointPos = bd.get_right_pos_on_map();
+  SDL_Rect pointPos = bd.get_xy_point_on_map();
   po->showPoint(pointPos,screen);
   arb.print_points_on_board(screen);
   SDL_Flip(screen);
@@ -79,12 +79,12 @@ int main (int argc, char **argv){
         delete po;
         po = new point;
         bd.setPointPos(po->getPointNum());
-        pointPos = bd.get_right_pos_on_map();
+        pointPos = bd.get_xy_point_on_map();
         sn.addExtraBody();
         sn.setLength(sn.getLength() + 1);
         arb.update_points();
       }else{
-        if(arb.crash_board_check(bd.getSnakeHeadPos()) == true){
+        if(arb.detectCollWithBoard(bd)== true){
           arb.print_gameover(screen);
           SDL_Flip(screen);
           SDL_Delay(3000);

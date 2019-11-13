@@ -27,7 +27,8 @@ public:
   void setSnakeHeadPos(int dir);
    int getPointPos(){return this->pointImgPos;};
     void setPointPos(int pointPos){this->pointImgPos = pointPos;};
-  SDL_Rect get_right_pos_on_map();
+  SDL_Rect get_xy_point_on_map();
+  SDL_Rect get_xy_snake_head_on_map();
 };
 
 #endif
