@@ -56,10 +56,6 @@ void arbitrator :: print_gameover(SDL_Surface * screen){
 }
 bool arbitrator :: detectCollWithBoard(board& b){
   SDL_Rect head_pos = b.get_xy_snake_head_on_map();
-  cout << "-=================="<< endl;
-  cout << "this is x" << head_pos.x << endl;
-  cout << "this is y" << head_pos.y << endl;
-  cout << "====================" << endl;
   if((head_pos.x < 15) || (head_pos.x > 512) || (head_pos.y > 821) || (head_pos.y < 50)){
     return true;
   }
