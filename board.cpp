@@ -11,13 +11,14 @@ using namespace std;
 board :: board(){
   position.x = 0;
   position.y = 0;
-  pos_head_snake_on_map = 213;
   image = IMG_Load("resources/board.png");
   int count = 0;
   int x = 13;
   int y = 50;
+  m = new Map*[18];
   for(int i = 0; i<18; i++){
     x = 13;
+    m[i] = new Map[12];
     for(int j = 0; j<12; j++){
       m[i][j].num = count;
       count++;
@@ -28,50 +29,6 @@ board :: board(){
     y = y + 43;
   }
 }
-SDL_Rect board :: get_xy_point_on_map(){
-   SDL_Rect pos;
-  for(int i = 0; i<18; i++){
-    for(int j = 0; j<12; j++){
-      if(m[i][j].num == this->pointImgPos){
-        pos.x = m[i][j].x;
-        pos.y = m[i][j].y;
-        return pos;
-      }
-    }
-  }
-  pos.x=-1; pos.y=-1;
-  return pos;
-}
 void board :: showBoard(SDL_Surface * screen){
   SDL_BlitSurface(this->image, NULL, screen, &position);
-}
-void board :: setSnakeHeadPos(int dir){
-  switch(dir){
-    case 1:
-    pos_head_snake_on_map -=12;
-    break;
-    case 2:
-    pos_head_snake_on_map ++;
-    break;
-    case 3:
-    pos_head_snake_on_map --;
-    break;
-    case 4:
-    pos_head_snake_on_map +=12;
-    break;
-  }
-}
-SDL_Rect board :: get_xy_snake_head_on_map(){
-    SDL_Rect pos;
-    for(int i = 0; i<18; i++){
-     for(int j = 0; j<12; j++){
-       if(m[i][j].num == this->pos_head_snake_on_map){
-         pos.x = m[i][j].x;
-         pos.y = m[i][j].y;
-         return pos;
-       }
-     }
-   }
-   pos.x=-1; pos.y=-1;
-   return pos;
 }

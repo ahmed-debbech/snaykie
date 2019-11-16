@@ -6,6 +6,7 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 #include "SDL/SDL_ttf.h"
+#include "board.h"
 using namespace std;
 
 class point{
@@ -13,9 +14,10 @@ class point{
   SDL_Surface * pointImg;
   SDL_Rect pointPos;
 public:
-  point();
+  point(board &);
   int getPointNum(){return this->num_point_on_board;}
-  void showPoint(SDL_Rect pos, SDL_Surface * screen);
+  void showPoint(SDL_Surface*);
+  SDL_Rect get_xy_point_on_map(board &);
   ~point();
 };
 #endif

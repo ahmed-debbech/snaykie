@@ -6,49 +6,11 @@
 #include <vector>
 #include <iterator>
 #include "snake.h"
+#include "node.h"
 using namespace std;
-void node :: setX(float x){
-  this->position.x = x;
-}
-void node :: setY(float y){
-  this->position.y = y;
-}
-float node :: getX(){
-  return this->position.x;
-}
-float node :: getY(){
-  return this->position.y;
-}
-void node :: setBodyImage(SDL_Surface * body){
-  this->body = body;
-}
-SDL_Surface * node :: getBodyImage(){
-  return body;
-}
-char node :: getDirection(){
-  return this->dir;
-}
-void node :: setDirection(char dir){
-  this->dir = dir;
-}
-char node :: getNextDirection(){
-  return this->nextDir;
-}
-void node :: setNextDirection(char nextDir){
-  this->nextDir = nextDir;
-}
-
-
-
-void snake :: setLength(int length){
-  this->length = length;
-}
-float snake :: getLength (){
-  return this->length;
-}
 
 snake :: snake(){
-   int i;
+   int i, numberOnMap = 213;
   float x = 387.4;
   float y = 778.4;
   length = 3;
@@ -62,6 +24,7 @@ snake :: snake(){
       n.setBodyImage(head);
       n.setDirection('l');
       n.setNextDirection('h');
+      n.setNumberOnMap(numberOnMap);
       v.push_back(n);
       x = x + 41;
     }else{
@@ -71,11 +34,20 @@ snake :: snake(){
       n.setBodyImage(body);
       n.setDirection('l');
       n.setNextDirection('l');
+      n.setNumberOnMap(numberOnMap);
       v.push_back(n);
       x = x + 41;
     }
+    numberOnMap++;
   }
 }
+void snake :: setLength(int length){
+  this->length = length;
+}
+float snake :: getLength (){
+  return this->length;
+}
+
 void snake :: showSnake(SDL_Surface * screen){
     for(int i = 0; i<= length-1; i++){
       SDL_Rect pos;
@@ -84,20 +56,46 @@ void snake :: showSnake(SDL_Surface * screen){
       SDL_BlitSurface(v[i].getBodyImage(), NULL, screen, &pos);
     }
 }
+void snake :: update_nodes_num_on_map (char direction, node &n){
+    switch(direction){
+      case 'u': n.setNumberOnMap(n.getNumberOnMap() - 12);
+      break;
+      case 'd': n.setNumberOnMap(n.getNumberOnMap()+ 12);
+      break;
+      case 'r': n.setNumberOnMap(n.getNumberOnMap()+ 1);
+      break;
+      case 'l': n.setNumberOnMap(n.getNumberOnMap() - 1);
+      break;
+    }
+}
+void snake :: update_nodes_num_on_map(node& n, node last_node){
+  switch(last_node.getDirection()){
+    case 'u': n.setNumberOnMap(last_node.getNumberOnMap() +12);
+    break;
+    case 'd': n.setNumberOnMap(last_node.getNumberOnMap() -12);
+    break;
+    case 'r': n.setNumberOnMap(last_node.getNumberOnMap() - 1);
+    break;
+    case 'l': n.setNumberOnMap(last_node.getNumberOnMap() + 1);
+    break;
+  }
+}
 int snake :: moveSnake(SDL_Event event){
-  int y,x, z ;
+  int y,x, z;
   if(event.key.keysym.sym == SDLK_UP){
     if(v[0].getDirection() != 'd'){
       v[0].setDirection('u');
       y = v[0].getY();
       y = y - 43;
       v[0].setY(y);
-      z =1;
+      update_nodes_num_on_map('u', v[0]);
+      z = 1;
     }else{
       v[0].setDirection('d');
       y = v[0].getY();
       y = y + 43;
       v[0].setY(y);
+      update_nodes_num_on_map('d', v[0]);
       z =4;
     }
   }else{
@@ -107,12 +105,14 @@ int snake :: moveSnake(SDL_Event event){
         x = v[0].getX();
         x = x + 41;
         v[0].setX(x);
+        update_nodes_num_on_map('r', v[0]);
         z =2;
       }else{
         v[0].setDirection('l');
         x = v[0].getX();
         x = x - 41;
         v[0].setX(x);
+        update_nodes_num_on_map('l', v[0]);
         z =3;
       }
     }else{
@@ -122,12 +122,14 @@ int snake :: moveSnake(SDL_Event event){
           x = v[0].getX();
           x = x - 41;
           v[0].setX(x);
+          update_nodes_num_on_map('l', v[0]);
           z =3;
         }else{
           v[0].setDirection('r');
           x = v[0].getX();
           x = x + 41;
           v[0].setX(x);
+          update_nodes_num_on_map('r', v[0]);
           z =2;
         }
       }else{
@@ -137,12 +139,14 @@ int snake :: moveSnake(SDL_Event event){
             y = v[0].getY();
             y = y + 43;
             v[0].setY(y);
+            update_nodes_num_on_map('d', v[0]);
             z =4;
           }else{
             v[0].setDirection('u');
             y = v[0].getY();
             y = y - 43;
             v[0].setY(y);
+            update_nodes_num_on_map('u', v[0]);
             z =1;
           }
         }else{
@@ -159,21 +163,25 @@ int snake :: moveSnake(SDL_Event event){
       y = v[i].getY();
       y = y - 43;
       v[i].setY(y);
+      update_nodes_num_on_map('u', v[i]);
       break;
       case 'r':
       x = v[i].getX();
       x = x + 41;
       v[i].setX(x);
+      update_nodes_num_on_map('r', v[i]);
         break;
       case 'l':
       x = v[i].getX();
       x = x - 41;
       v[i].setX(x);
+      update_nodes_num_on_map('l', v[i]);
         break;
       case 'd':
       y = v[i].getY();
       y = y + 43;
       v[i].setY(y);
+      update_nodes_num_on_map('d', v[i]);
       break;
     }
     v[i].setNextDirection(v[i-1].getDirection());
@@ -187,6 +195,7 @@ void snake :: addExtraBody(){
   last=v[length-1];
   n.setNextDirection(last.getDirection());
   n.setDirection(last.getDirection());
+  update_nodes_num_on_map(n, last);
   switch(n.getDirection()){
     case 'u': n.setY(last.getY() + 43);
               n.setX(last.getX());
@@ -202,4 +211,7 @@ void snake :: addExtraBody(){
     break;
   }
   v.push_back(n);
+}
+node snake ::  getNodes(int counter){
+  return v[counter];
 }

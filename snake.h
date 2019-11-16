@@ -8,29 +8,17 @@
 #include "SDL/SDL_ttf.h"
 #include <vector>
 #include <iterator>
+#include "node.h"
+
 using namespace std;
-class node{
-  SDL_Rect position;
-  SDL_Surface * body;
-  char dir;
-  char nextDir;
-public:
-  void setX(float x);
-  float getX();
-  void setY(float y);
-  float getY();
-  char getDirection();
-  void setNextDirection(char nextDir);
-  char getNextDirection();
-  void setDirection(char dir);
-  void setBodyImage(SDL_Surface * body);
-  SDL_Surface * getBodyImage();
-};
 
 class snake{
   int length;
   SDL_Surface * head;
   vector <node> v;
+  int pos_head_snake_on_map;
+  void update_nodes_num_on_map(char, node&);
+  void update_nodes_num_on_map(node&, node);
 public:
   snake();
   void setLength(int length);
@@ -38,5 +26,11 @@ public:
   void addExtraBody();
   void showSnake(SDL_Surface * screen);
   int moveSnake(SDL_Event event);
+  node getNodes(int);
+  void show(){
+   for(int i = 0; i<= length-1; i++){
+     cout << i << ": " <<v[i].getNumberOnMap() << endl;
+   }
+  }
 };
 #endif

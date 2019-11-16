@@ -9,6 +9,7 @@
 #include <vector>
 #include <iterator>
 #include "board.h"
+#include "snake.h"
 using namespace std;
 
 class arbitrator{
@@ -20,7 +21,8 @@ public:
   void print_points_on_board(SDL_Surface * screen);
   void update_points();
   void print_gameover(SDL_Surface * screen);
-  bool detectCollWithBoard(board&);
+  bool detectCollWithBoard(snake&);
+  bool detectCollWithItself(snake & );
 };
 
 

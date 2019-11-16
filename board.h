@@ -17,18 +17,11 @@ typedef struct{
 class board{
   SDL_Rect position;
   SDL_Surface * image;
-  Map m [18][12];
-  int pos_head_snake_on_map;
-  int pointImgPos;
+  Map ** m;
 public:
   board();
   void showBoard(SDL_Surface * screen);
-  int getSnakeHeadPos(){return this->pos_head_snake_on_map;};
-  void setSnakeHeadPos(int dir);
-   int getPointPos(){return this->pointImgPos;};
-    void setPointPos(int pointPos){this->pointImgPos = pointPos;};
-  SDL_Rect get_xy_point_on_map();
-  SDL_Rect get_xy_snake_head_on_map();
+  Map ** getMap(){ return m;}
 };
 
 #endif

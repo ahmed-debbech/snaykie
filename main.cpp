@@ -23,17 +23,14 @@ int main (int argc, char **argv){
   arbitrator arb;
   bd.showBoard(screen);
   sn.showSnake(screen);
-  point * po = new point;
-  bd.setPointPos(po->getPointNum());
-  SDL_Rect pointPos = bd.get_xy_point_on_map();
-  po->showPoint(pointPos,screen);
+  point * po = new point(bd);
+  po->showPoint(screen);
   arb.print_points_on_board(screen);
   SDL_Flip(screen);
   int mouvement = -1;
   SDL_Event event;
   SDL_Event event_holder;
   while(game_done == false){
-    //event = event_holder;
     SDL_PollEvent(&event);
       switch(event.type){
         case SDL_QUIT: // to quit the game
@@ -69,22 +66,27 @@ int main (int argc, char **argv){
       }
       int dir;
       dir = sn.moveSnake(event);
-      bd.setSnakeHeadPos(dir);
       bd.showBoard(screen);
       sn.showSnake(screen);
-      po->showPoint(pointPos, screen);
+      po->showPoint(screen);
       arb.print_points_on_board(screen);
-      //check for winning
-      if(arb.eat_check(bd.getSnakeHeadPos(), po->getPointNum()) == true){
+      //check for win
+      if(arb.eat_check(sn.getNodes(0).getNumberOnMap(), po->getPointNum()) == true){
         delete po;
-        po = new point;
-        bd.setPointPos(po->getPointNum());
-        pointPos = bd.get_xy_point_on_map();
+        po = new point(bd);
         sn.addExtraBody();
         sn.setLength(sn.getLength() + 1);
         arb.update_points();
       }else{
-        if(arb.detectCollWithBoard(bd)== true){
+        if(arb.detectCollWithBoard(sn)== true){
+          arb.print_gameover(screen);
+          SDL_Flip(screen);
+          SDL_Delay(3000);
+          game_done = true;
+        }
+        sn.show();
+        cout << sn.getNodes(0).getX()<< "//" <<  sn.getNodes(0).getY() << endl;
+        if(arb.detectCollWithItself(sn) == true){
           arb.print_gameover(screen);
           SDL_Flip(screen);
           SDL_Delay(3000);
@@ -92,7 +94,7 @@ int main (int argc, char **argv){
         }
       }
       SDL_Flip(screen);
-      SDL_Delay(250);
+      SDL_Delay(200);
       while(SDL_PollEvent(&event) != 0);
   }
   SDL_FreeSurface(screen);
