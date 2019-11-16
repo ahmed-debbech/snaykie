@@ -84,8 +84,6 @@ int main (int argc, char **argv){
           SDL_Delay(3000);
           game_done = true;
         }
-        sn.show();
-        cout << sn.getNodes(0).getX()<< "//" <<  sn.getNodes(0).getY() << endl;
         if(arb.detectCollWithItself(sn) == true){
           arb.print_gameover(screen);
           SDL_Flip(screen);

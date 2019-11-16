@@ -30,8 +30,6 @@ point :: point(board & b){
       }
     }
   }
-  cout << "point ===== " << num_point_on_board << endl;
-  cout << "XY ============="<< pointPos.x << " " << pointPos.y << endl;
 }
 point :: ~point(){
   SDL_FreeSurface(this->pointImg);

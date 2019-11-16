@@ -27,10 +27,5 @@ public:
   void showSnake(SDL_Surface * screen);
   int moveSnake(SDL_Event event);
   node getNodes(int);
-  void show(){
-   for(int i = 0; i<= length-1; i++){
-     cout << i << ": " <<v[i].getNumberOnMap() << endl;
-   }
-  }
 };
 #endif

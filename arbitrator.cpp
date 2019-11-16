@@ -66,12 +66,13 @@ bool arbitrator :: detectCollWithBoard(snake& s){
 
 bool arbitrator :: detectCollWithItself (snake & s){
   bool collision = false;
-  int i = 0;
-  while((i <= s.getLength()) && (collision == true)){
+  int i = 1;
+  while((i <= s.getLength()) && (collision == false)){
     if(s.getNodes(i).getNumberOnMap() == s.getNodes(0).getNumberOnMap()){
       collision = true;
     }else{
       collision = false;
+      i++;
     }
   }
 return collision;
