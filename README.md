@@ -11,7 +11,7 @@ Note: You should install [SDLv1.2](https://www.libsdl.org/download-1.2.php) in o
 ### Usage
 Open the app and then move the snake with arrows. Thats it! \
 And don't hit the frame or yourself.
-![Text](https://gph.is/g/aNMGXMG)
+<img src="https://gph.is/g/aNMGXMG" data-canonical-src="https://gph.is/g/aNMGXMG" width="200" height="400" />
 ### Contribution
 Pull requests are of course welcome. For major changes please open an issue first to discuss. \
 Fork the repo even if you just want to experiment with it.
