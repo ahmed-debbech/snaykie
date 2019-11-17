@@ -1,6 +1,6 @@
 ## Snaykie
-A very simple snake game that was developed as an educational project for C++ Programming language.
-Snaykie uses [SDL](https://www.libsdl.org/) Library as a dependency.
+A very simple snake game that was developed as an educational project for C++ Programming language. \
+Snaykie uses [SDL](https://www.libsdl.org/) Library as a dependency. \
 <B> This is a work in progress by Ahmed Debbech. </B>
 #### Project status
 Snaykie still under development.
