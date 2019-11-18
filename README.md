@@ -7,7 +7,8 @@ Snaykie still under development.
 ### Installation
 * Compile from source: clone the repo in your desired dirctory and then a 'make' command will compile & excute from source. \
 Note: You should install [SDLv1.2](https://www.libsdl.org/download-1.2.php) in order to work properly.
-* You can download the Windows binary from [here]()
+* You can download the Windows binary from [here](http://bit.ly/2r5SvPa). 
+decompress the zip file and open the folder and excute snaykie.exe
 ### Usage
 Open the app and then move the snake with arrows. Thats it! \
 And don't hit the frame or yourself. \
