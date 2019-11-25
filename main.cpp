@@ -13,7 +13,7 @@ int main (int argc, char **argv){
   // screen initialization
   SDL_Surface * screen = NULL;
   if(SDL_Init(SDL_INIT_VIDEO)!=0){
-  printf("unable to initialize SDL: %s \n",SDL_GetError());
+  printf("ERROR: Unable to initialize SDL: %s \n",SDL_GetError());
   	return 1;
   }  screen=SDL_SetVideoMode(525,900,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
   SDL_WM_SetCaption("Snaykie", NULL);
@@ -94,6 +94,7 @@ int main (int argc, char **argv){
       SDL_Flip(screen);
       SDL_Delay(200);
       while(SDL_PollEvent(&event) != 0);
+      sn.show();
   }
   SDL_FreeSurface(screen);
   SDL_Quit();

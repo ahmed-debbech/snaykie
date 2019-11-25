@@ -70,15 +70,17 @@ void snake :: update_nodes_num_on_map (char direction, node &n){
       break;
     }
 }
-void snake :: update_nodes_num_on_map(node& n, node last_node){
-  switch(last_node.getDirection()){
-    case 'u': n.setNumberOnMap(last_node.getNumberOnMap() +12);
+void snake :: update_nodes_num_on_map(node& n, const node& last_node){
+  node l = last_node;
+  int last = l.getNumberOnMap();
+  switch(l.getDirection()){
+    case 'u': n.setNumberOnMap(last+12);
     break;
-    case 'd': n.setNumberOnMap(last_node.getNumberOnMap() -12);
+    case 'd': n.setNumberOnMap(last -12);
     break;
-    case 'r': n.setNumberOnMap(last_node.getNumberOnMap() - 1);
+    case 'r': n.setNumberOnMap(last - 1);
     break;
-    case 'l': n.setNumberOnMap(last_node.getNumberOnMap() + 1);
+    case 'l': n.setNumberOnMap(last + 1);
     break;
   }
 }
