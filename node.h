@@ -17,10 +17,8 @@ class node{
   char dir;
   char nextDir;
 public:
-  void setX(float x);
-  float getX();
-  void setY(float y);
-  float getY();
+  SDL_Rect getPosition(){ return position;}
+  void setPosition(SDL_Rect pos){ this->position = pos;}
   char getDirection();
   void setNextDirection(char nextDir);
   char getNextDirection();

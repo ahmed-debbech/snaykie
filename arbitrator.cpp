@@ -56,8 +56,7 @@ void arbitrator :: print_gameover(SDL_Surface * screen){
 }
 bool arbitrator :: detectCollWithBoard(snake& s){
   SDL_Rect head_pos;
-  head_pos.x = s.getNodes(0).getX();
-  head_pos.y = s.getNodes(0).getY();
+  head_pos = s.getNodes(0).getPosition();
   if((head_pos.x < 10) || (head_pos.x > 512) || (head_pos.y > 821) || (head_pos.y < 40)){
     return true;
   }
