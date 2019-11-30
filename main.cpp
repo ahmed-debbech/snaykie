@@ -37,7 +37,7 @@ int main (int argc, char **argv){
           game_done = true;
           break;
           case SDL_KEYDOWN:
-             if(event.key.keysym.sym == SDLK_RIGHT){
+            if(event.key.keysym.sym == SDLK_RIGHT){
               event_holder = event;
             }else{
               if(event.key.keysym.sym == SDLK_LEFT){
@@ -56,15 +56,14 @@ int main (int argc, char **argv){
             }
           break;
           case SDL_MOUSEBUTTONDOWN:
-          while(SDL_PollEvent(&event) != 0);
           event = event_holder;
           break;
           case SDL_MOUSEMOTION:
-          while(SDL_PollEvent(&event) != 0);
           event = event_holder;
           break;
       }
       int dir;
+      while(SDL_PollEvent(&event) != 0);
       dir = sn.moveSnake(event);
       bd.showBoard(screen);
       sn.showSnake(screen);

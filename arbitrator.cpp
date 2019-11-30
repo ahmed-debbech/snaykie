@@ -71,12 +71,10 @@ bool arbitrator :: detectCollWithBoard(snake& s){
 bool arbitrator :: detectCollWithItself (snake & s){
   bool collision = false;
   int i = 1;
-  while((i <= s.getLength()) && (collision == false)){
+  while((i <= s.getLength()-1) && (collision == false)){
     if(s.getNodes(i).getNumberOnMap() == s.getNodes(0).getNumberOnMap()){
       collision = true;
-      cout << "sudden collision" << endl;
     }else{
-      collision = false;
       i++;
     }
   }
