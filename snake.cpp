@@ -155,7 +155,7 @@ int snake :: moveSnake(SDL_Event event){
             z =1;
           }
         }else{
-          z =-1;
+          z = -1;
         }
       }
     }

@@ -30,70 +30,74 @@ int main (int argc, char **argv){
   int mouvement = -1;
   SDL_Event event;
   SDL_Event event_holder;
+  int dir;
+  bool firstTime = true;
   while(game_done == false){
     SDL_PollEvent(&event);
       switch(event.type){
         case SDL_QUIT: // to quit the game
           game_done = true;
           break;
-          case SDL_KEYDOWN:
-            if(event.key.keysym.sym == SDLK_RIGHT){
-              event_holder = event;
-            }else{
-              if(event.key.keysym.sym == SDLK_LEFT){
-                event_holder = event;
-              }else{
-                if(event.key.keysym.sym == SDLK_UP){
-                  event_holder =event;
-                }else{
-                  if(event.key.keysym.sym == SDLK_DOWN){
-                    event_holder =event;
-                  }else{
-                    event = event_holder;
-                  }
-                }
-              }
-            }
-          break;
           case SDL_MOUSEBUTTONDOWN:
+          while(SDL_PollEvent(&event) != 0);
           event = event_holder;
           break;
           case SDL_MOUSEMOTION:
+          while(SDL_PollEvent(&event) != 0);
           event = event_holder;
           break;
+          case SDL_KEYDOWN: firstTime = false;
+          break;
       }
-      int dir;
-      while(SDL_PollEvent(&event) != 0);
-      dir = sn.moveSnake(event);
-      bd.showBoard(screen);
-      sn.showSnake(screen);
-      po->showPoint(screen);
-      arb.print_points_on_board(screen);
-      //check for win
-      if(arb.eat_check(sn.getNodes(0).getNumberOnMap(), po->getPointNum()) == true){
-        delete po;
-        po = new point(bd);
-        sn.addExtraBody();
-        sn.setLength(sn.getLength() + 1);
-        arb.update_points();
-      }else{
-        if(arb.detectCollWithBoard(sn)== true){
-          arb.print_gameover(screen);
-          SDL_Flip(screen);
-          SDL_Delay(3000);
-          game_done = true;
+      if(firstTime == false){
+        dir = sn.moveSnake(event);
+        //if none event from the above happened
+        //then make one depending on the head node direction
+          if(dir == -1){
+            SDL_Event ev;
+            ev.type = SDL_KEYDOWN;
+            switch(sn.getNodes(0).getDirection()){
+              case 'u': ev.key.keysym.sym = SDLK_UP;
+              break;
+              case 'd': ev.key.keysym.sym = SDLK_DOWN;
+              break;
+              case 'l': ev.key.keysym.sym = SDLK_LEFT;
+              break;
+              case 'r': ev.key.keysym.sym = SDLK_RIGHT;
+              break;
+            }
+            dir = sn.moveSnake(ev);
+          }
+        bd.showBoard(screen);
+        sn.showSnake(screen);
+        po->showPoint(screen);
+        arb.print_points_on_board(screen);
+        //check for win
+        if(arb.eat_check(sn.getNodes(0).getNumberOnMap(), po->getPointNum()) == true){
+          delete po;
+          po = new point(bd);
+          sn.addExtraBody();
+          sn.setLength(sn.getLength() + 1);
+          arb.update_points();
+        }else{
+          if(arb.detectCollWithBoard(sn)== true){
+            arb.print_gameover(screen);
+            SDL_Flip(screen);
+            SDL_Delay(3000);
+            game_done = true;
+          }
+          if(arb.detectCollWithItself(sn) == true){
+            arb.print_gameover(screen);
+            SDL_Flip(screen);
+            SDL_Delay(3000);
+            game_done = true;
+          }
         }
-        if(arb.detectCollWithItself(sn) == true){
-          arb.print_gameover(screen);
-          SDL_Flip(screen);
-          SDL_Delay(3000);
-          game_done = true;
-        }
-      }
-      SDL_Flip(screen);
-      SDL_Delay(200);
-      while(SDL_PollEvent(&event) != 0);
-      sn.show();
+        SDL_Flip(screen);
+        sn.show();
+        SDL_Delay(200);
+        while(SDL_PollEvent(&event) != 0);
+    }
   }
   SDL_FreeSurface(screen);
   SDL_Quit();
