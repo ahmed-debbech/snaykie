@@ -7,18 +7,6 @@
 
 using namespace std;
 
-void node :: setX(float x){
-  this->position.x = x;
-}
-void node :: setY(float y){
-  this->position.y = y;
-}
-float node :: getX(){
-  return this->position.x;
-}
-float node :: getY(){
-  return this->position.y;
-}
 void node :: setBodyImage(SDL_Surface * body){
   this->body = body;
 }

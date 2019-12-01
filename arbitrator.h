@@ -1,6 +1,9 @@
 #ifndef ARBITRATOR_H
 #define ARBITRATOR_H
-
+#define MAX_U 45
+#define MAX_R 500
+#define MAX_L 13
+#define MAX_D 800
 #include <iostream>
 #include "SDL/SDL_image.h"
 #include "SDL/SDL.h"

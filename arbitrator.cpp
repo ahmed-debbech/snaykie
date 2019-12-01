@@ -7,6 +7,7 @@
 #include <iterator>
 #include "arbitrator.h"
 #include "snake.h"
+
 using namespace std;
 
 arbitrator :: arbitrator(){
@@ -56,10 +57,13 @@ void arbitrator :: print_gameover(SDL_Surface * screen){
 }
 bool arbitrator :: detectCollWithBoard(snake& s){
   SDL_Rect head_pos;
-  head_pos.x = s.getNodes(0).getX();
-  head_pos.y = s.getNodes(0).getY();
-  if((head_pos.x < 10) || (head_pos.x > 512) || (head_pos.y > 821) || (head_pos.y < 40)){
+  head_pos = s.getNodes(0).getPosition();
+  if((head_pos.x < MAX_L) || (head_pos.x > MAX_R)){
     return true;
+  }else{
+    if((head_pos.y > MAX_D) || (head_pos.y < MAX_U)){
+      return true;
+    }
   }
   return false;
 }
@@ -67,11 +71,10 @@ bool arbitrator :: detectCollWithBoard(snake& s){
 bool arbitrator :: detectCollWithItself (snake & s){
   bool collision = false;
   int i = 1;
-  while((i <= s.getLength()) && (collision == false)){
+  while((i <= s.getLength()-1) && (collision == false)){
     if(s.getNodes(i).getNumberOnMap() == s.getNodes(0).getNumberOnMap()){
       collision = true;
     }else{
-      collision = false;
       i++;
     }
   }

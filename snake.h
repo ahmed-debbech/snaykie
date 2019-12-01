@@ -18,7 +18,7 @@ class snake{
   vector <node> v;
   int pos_head_snake_on_map;
   void update_nodes_num_on_map(char, node&);
-  void update_nodes_num_on_map(node&, node);
+  void update_nodes_num_on_map(node&, const node&);
 public:
   snake();
   void setLength(int length);
@@ -27,5 +27,12 @@ public:
   void showSnake(SDL_Surface * screen);
   int moveSnake(SDL_Event event);
   node getNodes(int);
+  void show(){
+    cout << "************************" << endl;
+    cout << "************************" << endl;
+    for(int i=0;i <= v.size()-1; i++){
+      cout << i << ": " << v[i].getNumberOnMap() << endl;
+    }
+  }
 };
 #endif

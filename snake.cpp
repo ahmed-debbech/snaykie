@@ -19,8 +19,10 @@ snake :: snake(){
   for(i = 0; i <= length-1; i++){
     if(i == 0){
       node n;
-      n.setX(x);
-      n.setY(y);
+      SDL_Rect pos;
+      pos.x = x;
+      pos.y = y;
+      n.setPosition(pos);
       n.setBodyImage(head);
       n.setDirection('l');
       n.setNextDirection('h');
@@ -29,8 +31,10 @@ snake :: snake(){
       x = x + 41;
     }else{
       node n;
-      n.setX(x);
-      n.setY(y);
+      SDL_Rect pos;
+      pos.x = x;
+      pos.y = y;
+      n.setPosition(pos);
       n.setBodyImage(body);
       n.setDirection('l');
       n.setNextDirection('l');
@@ -50,9 +54,7 @@ float snake :: getLength (){
 
 void snake :: showSnake(SDL_Surface * screen){
     for(int i = 0; i<= length-1; i++){
-      SDL_Rect pos;
-      pos.x = v[i].getX();
-      pos.y = v[i].getY();
+      SDL_Rect pos = v[i].getPosition();
       SDL_BlitSurface(v[i].getBodyImage(), NULL, screen, &pos);
     }
 }
@@ -68,33 +70,36 @@ void snake :: update_nodes_num_on_map (char direction, node &n){
       break;
     }
 }
-void snake :: update_nodes_num_on_map(node& n, node last_node){
-  switch(last_node.getDirection()){
-    case 'u': n.setNumberOnMap(last_node.getNumberOnMap() +12);
+void snake :: update_nodes_num_on_map(node& n, const node& last_node){
+  node l = last_node;
+  int last = l.getNumberOnMap();
+  switch(l.getDirection()){
+    case 'u': n.setNumberOnMap(last+12);
     break;
-    case 'd': n.setNumberOnMap(last_node.getNumberOnMap() -12);
+    case 'd': n.setNumberOnMap(last -12);
     break;
-    case 'r': n.setNumberOnMap(last_node.getNumberOnMap() - 1);
+    case 'r': n.setNumberOnMap(last - 1);
     break;
-    case 'l': n.setNumberOnMap(last_node.getNumberOnMap() + 1);
+    case 'l': n.setNumberOnMap(last + 1);
     break;
   }
 }
 int snake :: moveSnake(SDL_Event event){
-  int y,x, z;
+  int z;
+  SDL_Rect pos;
   if(event.key.keysym.sym == SDLK_UP){
     if(v[0].getDirection() != 'd'){
       v[0].setDirection('u');
-      y = v[0].getY();
-      y = y - 43;
-      v[0].setY(y);
+      pos = v[0].getPosition();
+      pos.y = pos.y - 43;
+      v[0].setPosition(pos);
       update_nodes_num_on_map('u', v[0]);
       z = 1;
     }else{
       v[0].setDirection('d');
-      y = v[0].getY();
-      y = y + 43;
-      v[0].setY(y);
+      pos = v[0].getPosition();
+      pos.y = pos.y + 43;
+      v[0].setPosition(pos);
       update_nodes_num_on_map('d', v[0]);
       z =4;
     }
@@ -102,16 +107,16 @@ int snake :: moveSnake(SDL_Event event){
     if(event.key.keysym.sym == SDLK_RIGHT){
       if(v[0].getDirection() != 'l'){
         v[0].setDirection('r');
-        x = v[0].getX();
-        x = x + 41;
-        v[0].setX(x);
+        pos = v[0].getPosition();
+        pos.x = pos.x + 41;
+        v[0].setPosition(pos);
         update_nodes_num_on_map('r', v[0]);
         z =2;
       }else{
         v[0].setDirection('l');
-        x = v[0].getX();
-        x = x - 41;
-        v[0].setX(x);
+        pos = v[0].getPosition();
+        pos.x = pos.x - 41;
+        v[0].setPosition(pos);
         update_nodes_num_on_map('l', v[0]);
         z =3;
       }
@@ -119,16 +124,16 @@ int snake :: moveSnake(SDL_Event event){
       if(event.key.keysym.sym == SDLK_LEFT){
         if(v[0].getDirection() != 'r'){
           v[0].setDirection('l');
-          x = v[0].getX();
-          x = x - 41;
-          v[0].setX(x);
+          pos = v[0].getPosition();
+          pos.x = pos.x - 41;
+          v[0].setPosition(pos);
           update_nodes_num_on_map('l', v[0]);
           z =3;
         }else{
           v[0].setDirection('r');
-          x = v[0].getX();
-          x = x + 41;
-          v[0].setX(x);
+          pos = v[0].getPosition();
+          pos.x = pos.x + 41;
+          v[0].setPosition(pos);
           update_nodes_num_on_map('r', v[0]);
           z =2;
         }
@@ -136,21 +141,21 @@ int snake :: moveSnake(SDL_Event event){
         if(event.key.keysym.sym == SDLK_DOWN){
           if(v[0].getDirection() != 'u'){
             v[0].setDirection('d');
-            y = v[0].getY();
-            y = y + 43;
-            v[0].setY(y);
+            pos = v[0].getPosition();
+            pos.y = pos.y + 43;
+            v[0].setPosition(pos);
             update_nodes_num_on_map('d', v[0]);
             z =4;
           }else{
             v[0].setDirection('u');
-            y = v[0].getY();
-            y = y - 43;
-            v[0].setY(y);
+            pos = v[0].getPosition();
+            pos.y = pos.y - 43;
+            v[0].setPosition(pos);
             update_nodes_num_on_map('u', v[0]);
             z =1;
           }
         }else{
-          z =-1;
+          z = -1;
         }
       }
     }
@@ -160,27 +165,27 @@ int snake :: moveSnake(SDL_Event event){
     v[i].setDirection(v[i].getNextDirection());
     switch(v[i].getDirection()){
       case 'u':
-      y = v[i].getY();
-      y = y - 43;
-      v[i].setY(y);
+      pos = v[i].getPosition();
+      pos.y = pos.y - 43;
+      v[i].setPosition(pos);
       update_nodes_num_on_map('u', v[i]);
       break;
       case 'r':
-      x = v[i].getX();
-      x = x + 41;
-      v[i].setX(x);
+      pos = v[i].getPosition();
+      pos.x = pos.x + 41;
+      v[i].setPosition(pos);
       update_nodes_num_on_map('r', v[i]);
         break;
       case 'l':
-      x = v[i].getX();
-      x = x - 41;
-      v[i].setX(x);
+      pos = v[i].getPosition();
+      pos.x = pos.x - 41;
+      v[i].setPosition(pos);
       update_nodes_num_on_map('l', v[i]);
         break;
       case 'd':
-      y = v[i].getY();
-      y = y + 43;
-      v[i].setY(y);
+      pos = v[i].getPosition();
+      pos.y = pos.y + 43;
+      v[i].setPosition(pos);
       update_nodes_num_on_map('d', v[i]);
       break;
     }
@@ -196,18 +201,19 @@ void snake :: addExtraBody(){
   n.setNextDirection(last.getDirection());
   n.setDirection(last.getDirection());
   update_nodes_num_on_map(n, last);
+  SDL_Rect pos = last.getPosition();
   switch(n.getDirection()){
-    case 'u': n.setY(last.getY() + 43);
-              n.setX(last.getX());
+    case 'u': pos.y = pos.y + 43;
+              n.setPosition(pos);
     break;
-    case 'l': n.setX(last.getX() + 41);
-              n.setY(last.getY());
+    case 'l': pos.x = pos.x + 41;
+              n.setPosition(pos);
     break;
-    case 'r': n.setX(last.getX() - 41);
-              n.setY(last.getY());
+    case 'r': pos.x = pos.x - 41;
+              n.setPosition(pos);
     break;
-    case 'd': n.setY(last.getY() - 43);
-              n.setX(last.getX());
+    case 'd': pos.y = pos.y - 43;
+              n.setPosition(pos);
     break;
   }
   v.push_back(n);
