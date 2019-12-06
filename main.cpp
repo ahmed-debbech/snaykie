@@ -16,7 +16,9 @@ int main (int argc, char **argv){
   if(SDL_Init(SDL_INIT_VIDEO)!=0){
   printf("ERROR: Unable to initialize SDL: %s \n",SDL_GetError());
   	return 1;
-  }  screen=SDL_SetVideoMode(525,900,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
+  }
+  //initializing screen
+  screen = SDL_SetVideoMode(500,350,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
   SDL_WM_SetCaption("Snaykie", NULL);
   bool game_done = false;
   snake sn;
