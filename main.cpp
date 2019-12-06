@@ -1,4 +1,3 @@
-//==
 #include <iostream>
 #include "SDL/SDL_image.h"
 #include "SDL/SDL.h"
@@ -8,6 +7,7 @@
 #include "board.h"
 #include "point.h"
 #include "arbitrator.h"
+#include "menu.h"
 using namespace std;
 
 int main (int argc, char **argv){
@@ -20,6 +20,15 @@ int main (int argc, char **argv){
   //initializing screen
   screen = SDL_SetVideoMode(500,350,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
   SDL_WM_SetCaption("Snaykie", NULL);
+  Ui::Menu official_menu;
+  if(official_menu.initialize() == true){
+    official_menu.print(screen);
+    SDL_Flip(screen);
+    SDL_Delay(5000);
+  }else{
+    cout << "Error while loading game resources.. make sure path is correct" << endl;
+    return 1;
+  }
   bool game_done = false;
   snake sn;
   board bd;

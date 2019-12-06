@@ -15,24 +15,34 @@ namespace Ui{
 
 bool Menu :: initialize(){
   background = IMG_Load("resources/menu/menu_back.png");
-  pos.x = 0; pos.y = 0;
-  pos.h = background->h;
-  pos.w = background->w;
-  SDL_Surface * buff = NULL;
-  SDL_Rect pos;
-  Widget * w = NULL;
-  //play button init ====
-  buff = IMG_Load("resources/menu/play_button.png");
-  pos.x = 142; pos.h = buff->h;
-  pos.y = 180; pos.w = buff->w;
-  w = new Button("playbutton", pos, buff);
-  ui_components.push_back(w);
-  //about button init ====
-  buff = IMG_Load("resources/menu/play_button.png");
-  pos.x = 142; pos.h = buff->h;
-  pos.y = 257; pos.w = buff->w;
-   w = new Button("aboutbutton", pos, buff);
-  ui_components.push_back(w);
+  if(background != NULL){
+    pos.x = 0; pos.y = 0;
+    pos.h = background->h;
+    pos.w = background->w;
+    SDL_Surface * buff = NULL;
+    SDL_Rect pos;
+    Widget * w = NULL;
+    //play button init ====
+    buff = IMG_Load("resources/menu/play_button.png");
+    if(buff != NULL){
+      pos.x = 162; pos.h = buff->h;
+      pos.y = 180; pos.w = buff->w;
+      w = new Button("playbutton", pos, buff);
+      ui_components.push_back(w);
+      //about button init ====
+      buff = IMG_Load("resources/menu/play_button.png");
+      if(buff != NULL){
+        pos.x = 162; pos.h = buff->h;
+        pos.y = 257; pos.w = buff->w;
+         w = new Button("aboutbutton", pos, buff);
+        ui_components.push_back(w);
+        init = true;
+      }
+    }
+  }else{
+    init = false;
+  }
+  return init;
 }
 void Menu :: print(SDL_Surface * screen){
   SDL_BlitSurface(background, NULL, screen, &pos);
