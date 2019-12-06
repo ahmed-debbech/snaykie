@@ -17,7 +17,7 @@ And don't hit the frame or yourself. \
 Pull requests are of course welcome. For major changes please open an issue first to discuss. \
 Fork the repo even if you just want to experiment with it.
 * All Prod. and mainline releases are maintained only by Ahmed Debbech. \
-No documentation is available yet as the project still in progress and the API is not considered stable.
+No documentation is available yet as the project is still in progress and the API is not considered stable.
 ### Acknowlegment
 [Ahmed Debbech](https://twitter.com/AhmedDebb) : Developer & Designer\
 Contact at: debbech.ahmed@gmail.com
