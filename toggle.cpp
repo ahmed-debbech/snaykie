@@ -5,6 +5,7 @@
 #include <iostream>
 #include "toggle.h"
 #include "widget.h"
+
 namespace Ui{
 
 Toggle :: Toggle(std::string name, SDL_Rect position, SDL_Surface * img) : Widget(name,position,img){
@@ -16,4 +17,6 @@ Toggle :: ~Toggle(){
 void Toggle :: showOnClickImg(SDL_Surface * screen){
   std::cout << "here" << std::endl;
 }
+
+
 };

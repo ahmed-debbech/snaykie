@@ -17,4 +17,5 @@ Button :: ~Button(){
 void Button :: showHover(SDL_Surface * screen){
   std::cout << "test" << std::endl;
 }
+
 };

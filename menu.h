@@ -1,5 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
+
 #include <iostream>
 #include "widget.h"
 #include "SDL/SDL_image.h"
@@ -9,6 +10,7 @@
 #include <vector>
 #include "button.h"
 #include "toggle.h"
+
 namespace Ui{
 
 class Menu{

@@ -4,10 +4,8 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 #include "SDL/SDL_ttf.h"
-#include "button.h"
 #include <vector>
 #include "button.h"
-#include "widget.h"
 #include "toggle.h"
 using namespace std;
 
