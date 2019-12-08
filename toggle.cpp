@@ -15,7 +15,7 @@ Toggle :: ~Toggle(){
   SDL_FreeSurface(onClickImg);
 }
 void Toggle :: showOnClickImg(SDL_Surface * screen){
-  std::cout << "here" << std::endl;
+  
 }
 
 
