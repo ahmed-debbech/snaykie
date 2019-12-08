@@ -8,7 +8,7 @@
 #include <vector>
 #include "button.h"
 #include "widget.h"
-
+#include "toggle.h"
 using namespace std;
 
 namespace Ui{
@@ -20,24 +20,39 @@ bool Menu :: initialize(){
     pos.h = background->h;
     pos.w = background->w;
     SDL_Surface * buff = NULL;
-    SDL_Rect pos;
+    SDL_Rect posbut;
     Widget * w = NULL;
     //play button init ====
     buff = IMG_Load("resources/menu/play_button.png");
     if(buff != NULL){
-      pos.x = 162; pos.h = buff->h;
-      pos.y = 180; pos.w = buff->w;
-      w = new Button("playbutton", pos, buff);
+      posbut.x = 165; posbut.h = buff->h;
+      posbut.y = 180; posbut.w = buff->w;
+      w = new Button("playbutton", posbut, buff);
       ui_components.push_back(w);
       //about button init ====
-      buff = IMG_Load("resources/menu/play_button.png");
+      buff = IMG_Load("resources/menu/about_button.png");
       if(buff != NULL){
-        pos.x = 162; pos.h = buff->h;
-        pos.y = 257; pos.w = buff->w;
-         w = new Button("aboutbutton", pos, buff);
+        posbut.x = 165; posbut.h = buff->h;
+        posbut.y = 257; posbut.w = buff->w;
+         w = new Button("aboutbutton", posbut, buff);
         ui_components.push_back(w);
         init = true;
+        //volume toggle init ====
+        buff = IMG_Load("resources/menu/volume_button.png");
+        if(buff != NULL){
+          posbut.x = 469; posbut.h = buff->h;
+          posbut.y = 326; posbut.w = buff->w;
+           w = new Toggle("volumetoggle", posbut, buff);
+          ui_components.push_back(w);
+          init = true;
+        }else{
+          init = false;
+        }
+      }else{
+        init = false;
       }
+    }else{
+      init = false;
     }
   }else{
     init = false;

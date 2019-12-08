@@ -13,7 +13,7 @@ namespace Ui{
 class Button : public Widget{
   SDL_Surface * hover;
 public:
-    void showHover();
+    void showHover(SDL_Surface * screen);
     Button(std::string name, SDL_Rect position, SDL_Surface * img); // it will initialize base class as well
    ~Button();
 };

@@ -15,5 +15,4 @@ Widget :: ~Widget(){
 void Widget :: print (SDL_Surface*screen){
   SDL_BlitSurface(image, NULL, screen, &pos);
 }
-
 };

@@ -11,6 +11,7 @@
 namespace Ui{
 
 class Widget{
+  protected :
   std::string objName;
   SDL_Rect pos;
   SDL_Surface * image;
@@ -25,6 +26,8 @@ public:
   std::string getName(){ return objName;}
   void setPos(SDL_Rect p){ pos = p;}
   SDL_Rect getPos(){ return pos;}
+  virtual void showOnClickImg(SDL_Surface * screen)=0;
+  virtual void showHover(SDL_Surface * screen) =0;
   void print(SDL_Surface*);
   virtual ~Widget();
 };
