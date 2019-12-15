@@ -14,4 +14,8 @@ void Button :: showHover(SDL_Surface * screen){
   std::cout << "test" << std::endl;
 }
 
+void Button::setImageHover(SDL_Surface * h){
+  hover = h;
+}
+
 };

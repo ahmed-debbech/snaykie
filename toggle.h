@@ -11,9 +11,13 @@ namespace Ui{
 
 class Toggle : public Widget{
   SDL_Surface * onClickImg;
+  bool isClicked;
 public:
   Toggle(std::string name, SDL_Rect position, SDL_Surface * img); // it will initialize base class as well
   void showOnClickImg(SDL_Surface * screen);
+  void setImageClicked(SDL_Surface*);
+  void setFlag(bool f){isClicked = f;}
+  bool getFlag() { return isClicked;}
   ~Toggle();
 };
 

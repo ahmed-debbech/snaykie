@@ -14,5 +14,7 @@ void Toggle :: showOnClickImg(SDL_Surface * screen){
 
 }
 
-
+void Toggle::setImageClicked(SDL_Surface * i){
+  onClickImg = i;
+}
 };

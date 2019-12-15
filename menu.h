@@ -17,9 +17,8 @@ class Menu{
   SDL_Surface * background;
   SDL_Rect pos;
   std::vector <Widget*> ui_components;
-  bool init; //for checking if the initialization was successful
 public:
-  bool initialize();
+  void initialize();
   void print(SDL_Surface * screen);
   ~Menu();
 };

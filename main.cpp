@@ -21,14 +21,17 @@ int main (int argc, char **argv){
   screen = SDL_SetVideoMode(500,350,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
   SDL_WM_SetCaption("Snaykie", NULL);
   Ui::Menu official_menu;
-  if(official_menu.initialize() == true){
+  try{
+    official_menu.initialize();
+  }catch(string e){
+    cout << e << endl;
+    return 1; // quit the program
+  }
     official_menu.print(screen);
     SDL_Flip(screen);
     SDL_Delay(5000);
-  }else{
-    cout << "Error while loading game resources.. make sure path is correct" << endl;
-    return 1;
-  }
+
+  //begin game play initialization
   bool game_done = false;
   snake sn;
   board bd;
@@ -44,6 +47,8 @@ int main (int argc, char **argv){
   SDL_Event event_holder;
   int dir;
   bool firstTime = true;
+  //end game play initialization
+//game loop
   while(game_done == false){
     SDL_PollEvent(&event);
       switch(event.type){
