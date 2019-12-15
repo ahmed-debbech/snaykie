@@ -17,4 +17,12 @@ void Toggle :: showOnClickImg(SDL_Surface * screen){
 void Toggle::setImageClicked(SDL_Surface * i){
   onClickImg = i;
 }
+
+void Toggle :: print(SDL_Surface * screen){
+  if(isClicked == true){
+    SDL_BlitSurface(onClickImg, NULL, screen, &pos);
+  }else{
+    SDL_BlitSurface(image, NULL, screen, &pos);
+  }
+}
 };

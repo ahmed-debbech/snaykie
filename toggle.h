@@ -18,6 +18,7 @@ public:
   void setImageClicked(SDL_Surface*);
   void setFlag(bool f){isClicked = f;}
   bool getFlag() { return isClicked;}
+  void print(SDL_Surface * screen);
   ~Toggle();
 };
 

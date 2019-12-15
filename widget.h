@@ -26,7 +26,7 @@ public:
   std::string getName(){ return objName;}
   void setPos(SDL_Rect p){ pos = p;}
   SDL_Rect getPos(){ return pos;}
-  void print(SDL_Surface*);
+  virtual void print(SDL_Surface*)=0;
   virtual ~Widget();
 };
 

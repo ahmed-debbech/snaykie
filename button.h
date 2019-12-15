@@ -19,6 +19,7 @@ public:
     void setImageHover(SDL_Surface *);
     void setFlag(bool f){isHovered = f;}
     bool getFlag() { return isHovered;}
+    void print(SDL_Surface * screen);
    ~Button();
 };
 

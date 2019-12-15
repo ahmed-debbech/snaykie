@@ -17,5 +17,11 @@ void Button :: showHover(SDL_Surface * screen){
 void Button::setImageHover(SDL_Surface * h){
   hover = h;
 }
-
+void Button :: print(SDL_Surface * screen){
+  if(isHovered == true){
+    SDL_BlitSurface(hover, NULL, screen, &pos);
+  }else{
+    SDL_BlitSurface(image, NULL, screen, &pos);
+  }
+}
 };

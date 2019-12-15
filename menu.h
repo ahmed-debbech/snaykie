@@ -20,6 +20,8 @@ class Menu{
 public:
   void initialize();
   void print(SDL_Surface * screen);
+  void mouseMotion(SDL_Event event);
+  void mouseClick(SDL_Event event);
   ~Menu();
 };
 

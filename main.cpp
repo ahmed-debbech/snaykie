@@ -27,10 +27,21 @@ int main (int argc, char **argv){
     cout << e << endl;
     return 1; // quit the program
   }
+  bool quit_menu = false;
+  SDL_Event event;
+  //handle menu events
+  do{
     official_menu.print(screen);
     SDL_Flip(screen);
-    SDL_Delay(5000);
-
+    while(SDL_PollEvent(&event) == 0){
+      switch(event.type){
+        case SDL_MOUSEMOTION: official_menu.mouseMotion(event);
+        break;
+        case SDL_MOUSEBUTTONDOWN:
+        break;
+      }
+    }
+  }while(quit_menu == false);
   //begin game play initialization
   bool game_done = false;
   snake sn;
@@ -43,7 +54,6 @@ int main (int argc, char **argv){
   arb.print_points_on_board(screen);
   SDL_Flip(screen);
   int mouvement = -1;
-  SDL_Event event;
   SDL_Event event_holder;
   int dir;
   bool firstTime = true;
