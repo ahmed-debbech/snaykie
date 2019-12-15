@@ -35,7 +35,8 @@ int main (int argc, char **argv){
     SDL_Flip(screen);
     while(SDL_PollEvent(&event) == 0){
       switch(event.type){
-        case SDL_MOUSEMOTION: official_menu.mouseMotion(event);
+        case SDL_MOUSEMOTION:
+        official_menu.mouseMotion(event);
         break;
         case SDL_MOUSEBUTTONDOWN:
         break;

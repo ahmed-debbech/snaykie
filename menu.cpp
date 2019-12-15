@@ -90,16 +90,14 @@ void Menu :: mouseMotion(SDL_Event event){
     && (event.motion.x >= ui_components[i]->getPos().x))
     && ((event.motion.y >= ui_components[i]->getPos().y)
     && (event.motion.y <= (ui_components[i]->getPos().y + ui_components[i]->getPos().h)))){
-      cout << "debug1 " << endl;
-      if(typeid(ui_components[i]) == typeid(Button)){
+      if(typeid(*(ui_components[i])) == typeid(Button)){
           ((Button*)ui_components[i])->setFlag(true);
-      }else{
-        if(typeid(ui_components[i]) == typeid(Toggle)){
-          ((Toggle*)ui_components[i])->setFlag(true);
-        }
+      }
+    }else{
+      if(typeid(*(ui_components[i])) == typeid(Button)){
+          ((Button*)ui_components[i])->setFlag(false);
       }
     }
-    cout << "debug" << endl;
   }
 }
 void Menu :: mouseClick(SDL_Event event){
