@@ -37,7 +37,7 @@ void Menu :: initialize(){
         posbut.x = 165; posbut.h = buff->h;
         posbut.y = 257; posbut.w = buff->w;
          w = new Button("aboutbutton", posbut, buff);
-         SDL_Surface * buff1 = IMG_Load("resources/menu/play_button_hovered.png");
+         SDL_Surface * buff1 = IMG_Load("resources/menu/about_button_hovered.png");
          if(buff1 == NULL){
            throw "Can't load resources";
          }
@@ -51,7 +51,7 @@ void Menu :: initialize(){
           posbut.x = 469; posbut.h = buff->h;
           posbut.y = 326; posbut.w = buff->w;
            w = new Toggle("volumetoggle", posbut, buff);
-           SDL_Surface * buff1 = IMG_Load("resources/menu/play_button_hovered.png");
+           SDL_Surface * buff1 = IMG_Load("resources/menu/volume_button_muted.png");
            if(buff1 == NULL){
              throw "Can't load resources";
            }
