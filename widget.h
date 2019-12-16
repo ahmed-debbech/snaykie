@@ -15,7 +15,7 @@ class Widget{
   std::string objName;
   SDL_Rect pos;
   SDL_Surface * image;
-
+  int action;
 public:
   Widget(std::string name, SDL_Rect position, SDL_Surface * img){
     objName = name;
@@ -27,6 +27,8 @@ public:
   void setPos(SDL_Rect p){ pos = p;}
   SDL_Rect getPos(){ return pos;}
   virtual void print(SDL_Surface*)=0;
+  int getAction(){return action;}
+  void setAction(int ac){action = ac;}
   virtual ~Widget();
 };
 

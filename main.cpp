@@ -27,7 +27,7 @@ int main (int argc, char **argv){
     cout << e << endl;
     return 1; // quit the program
   }
-  bool quit_menu = false;
+int choice = -1;
   SDL_Event event;
   //handle menu events
   do{
@@ -41,10 +41,11 @@ int main (int argc, char **argv){
         official_menu.mouseMotion(event);
         break;
         case SDL_MOUSEBUTTONDOWN:
+        choice = official_menu.mouseClick(event);
         break;
       }
     }
-  }while(quit_menu == false);
+  }while(choice == -1);
   //begin game play initialization
   bool game_done = false;
   snake sn;

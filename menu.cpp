@@ -27,6 +27,7 @@ void Menu :: initialize(){
       if(buff1 == NULL){
         throw "Can't load resources";
       }
+      w->setAction(1);
       ((Button*)w)->setImageHover(buff1);
       ((Button *)w)->setFlag(false);
       ui_components.push_back(w);
@@ -41,6 +42,7 @@ void Menu :: initialize(){
          if(buff1 == NULL){
            throw "Can't load resources";
          }
+         w->setAction(2);
          ((Button*)w)->setImageHover(buff1);
          ((Button *)w)->setFlag(false);
         ui_components.push_back(w);
@@ -55,6 +57,7 @@ void Menu :: initialize(){
            if(buff1 == NULL){
              throw "Can't load resources";
            }
+           w->setAction(3);
            ((Toggle*)w)->setImageClicked(buff1);
            ((Toggle *)w)->setFlag(false);
            ui_components.push_back(w);
@@ -100,7 +103,17 @@ void Menu :: mouseMotion(SDL_Event event){
     }
   }
 }
-void Menu :: mouseClick(SDL_Event event){
 
+int Menu :: mouseClick(SDL_Event event){
+  for(int i =0; i<= ui_components.size()-1; i++){
+    if(((event.button.x <= (ui_components[i]->getPos().x + ui_components[i]->getPos().w))
+    && (event.button.x >= ui_components[i]->getPos().x))
+    && ((event.button.y >= ui_components[i]->getPos().y)
+    && (event.button.y <= (ui_components[i]->getPos().y + ui_components[i]->getPos().h)))){
+      return ui_components[i]->getAction();
+    }
+  }
+  return -1;
 }
+
 };
