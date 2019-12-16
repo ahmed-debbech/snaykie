@@ -33,8 +33,10 @@ int main (int argc, char **argv){
   do{
     official_menu.print(screen);
     SDL_Flip(screen);
-    while(SDL_PollEvent(&event) == 0){
+    while(SDL_PollEvent(&event) == 1){
       switch(event.type){
+        case SDL_QUIT: return 1; //quit game
+        break;
         case SDL_MOUSEMOTION:
         official_menu.mouseMotion(event);
         break;
