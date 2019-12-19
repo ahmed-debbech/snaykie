@@ -25,7 +25,7 @@ int main (int argc, char **argv){
     official_menu->initialize();
   }catch(string e){
     cout << e << endl;
-    return 1; // quit the program
+    return 0; // quit the program
   }
 int choice = -1;
   SDL_Event event;
@@ -35,7 +35,7 @@ int choice = -1;
     SDL_Flip(screen);
     while(SDL_PollEvent(&event) == 1){
       switch(event.type){
-        case SDL_QUIT: return 1; //quit game
+        case SDL_QUIT: return 0; //quit game
         break;
         case SDL_MOUSEMOTION:
         official_menu->mouseMotion(event);
