@@ -5,7 +5,7 @@ Snaykie uses [SDL](https://www.libsdl.org/) Library as a dependency. \
 ### Project status
 Snaykie is still under development.
 ### Installation
-* Compile from source: clone the repo in your desired dirctory and then a 'make' command will compile & excute from source. \
+* Compile from source: clone the repo in your desired dirctory and then a 'make' command in the 'src' directorywill compile & excute from source. \
 Note: You should install [SDLv1.2](https://www.libsdl.org/download-1.2.php) in order to work properly.
 * You can download the Windows binary from [here](http://bit.ly/2r5SvPa).
 decompress the zip file and open the folder and excute snaykie.exe
