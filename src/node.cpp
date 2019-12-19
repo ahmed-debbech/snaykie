@@ -3,7 +3,7 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 #include "SDL/SDL_ttf.h"
-#include "node.h"
+#include "headers/node.h"
 
 using namespace std;
 

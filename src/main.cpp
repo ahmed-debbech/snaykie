@@ -3,11 +3,11 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 #include "SDL/SDL_ttf.h"
-#include "snake.h"
-#include "board.h"
-#include "point.h"
-#include "arbitrator.h"
-#include "menu.h"
+#include "headers/snake.h"
+#include "headers/board.h"
+#include "headers/point.h"
+#include "headers/arbitrator.h"
+#include "headers/menu.h"
 using namespace std;
 
 int main (int argc, char **argv){
@@ -138,6 +138,10 @@ int choice = -1;
             while(SDL_PollEvent(&event) != 0);
         }
       }
+      delete bd;
+      delete sn;
+      delete arb;
+      delete po;
     break;
     case 2:
     break;

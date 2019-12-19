@@ -5,8 +5,8 @@
 #include "SDL/SDL_ttf.h"
 #include <list>
 #include <iterator>
-#include "arbitrator.h"
-#include "snake.h"
+#include "headers/arbitrator.h"
+#include "headers/snake.h"
 
 using namespace std;
 

@@ -1,6 +1,6 @@
 #include <iostream>
-#include "toggle.h"
-#include "widget.h"
+#include "headers/toggle.h"
+#include "headers/widget.h"
 
 namespace Ui{
 

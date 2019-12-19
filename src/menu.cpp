@@ -1,9 +1,9 @@
 #include <iostream>
-#include "menu.h"
+#include "headers/menu.h"
 #include <vector>
 #include <typeinfo>
-#include "button.h"
-#include "toggle.h"
+#include "headers/button.h"
+#include "headers/toggle.h"
 using namespace std;
 
 namespace Ui{

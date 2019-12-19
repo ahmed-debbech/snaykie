@@ -3,8 +3,8 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 #include "SDL/SDL_ttf.h"
-#include "point.h"
-#include "board.h"
+#include "headers/point.h"
+#include "headers/board.h"
 #include <ctime>
 #include <cstdlib>
 using namespace std;

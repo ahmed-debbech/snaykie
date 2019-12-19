@@ -1,6 +1,6 @@
 #include <iostream>
-#include "button.h"
-#include "widget.h"
+#include "headers/button.h"
+#include "headers/widget.h"
 
 namespace Ui{
 

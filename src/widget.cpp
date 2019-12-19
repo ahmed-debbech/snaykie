@@ -1,5 +1,5 @@
 #include <iostream>
-#include "widget.h"
+#include "headers/widget.h"
 
 namespace Ui{
 
