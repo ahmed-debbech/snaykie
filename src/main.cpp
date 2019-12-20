@@ -17,12 +17,11 @@ int main (int argc, char **argv){
   printf("ERROR: Unable to initialize SDL: %s \n",SDL_GetError());
   	return 1;
   }
-  //initializing screen
   int choice = -1;
   do{
   screen = SDL_SetVideoMode(500,350,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
   SDL_WM_SetCaption("Snaykie", NULL);
-  
+
   Ui::Menu * official_menu = new Ui::Menu;
   try{
     official_menu->initialize();
@@ -32,7 +31,6 @@ int main (int argc, char **argv){
   }
   choice = -1;
   SDL_Event event;
-  //handle menu events
   do{
     official_menu->print(screen);
     SDL_Flip(screen);
@@ -63,6 +61,9 @@ int main (int argc, char **argv){
   switch(choice){
     case 1:
       //begin game play initialization
+      SDL_FreeSurface(screen);
+      screen = SDL_SetVideoMode(525,900,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
+      SDL_WM_SetCaption("Snaykie", NULL);
       bd = new board();
       sn = new snake();
       arb = new arbitrator();
@@ -78,7 +79,7 @@ int main (int argc, char **argv){
         SDL_PollEvent(&event);
           switch(event.type){
             case SDL_QUIT: // to quit the game
-              game_done = true;
+              return 0;
               break;
               case SDL_MOUSEBUTTONDOWN:
               while(SDL_PollEvent(&event) != 0);
@@ -136,7 +137,6 @@ int main (int argc, char **argv){
               }
             }
             SDL_Flip(screen);
-            sn->show();
             SDL_Delay(200);
             while(SDL_PollEvent(&event) != 0);
         }
