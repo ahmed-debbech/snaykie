@@ -18,8 +18,11 @@ int main (int argc, char **argv){
   	return 1;
   }
   //initializing screen
+  int choice = -1;
+  do{
   screen = SDL_SetVideoMode(500,350,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
   SDL_WM_SetCaption("Snaykie", NULL);
+  
   Ui::Menu * official_menu = new Ui::Menu;
   try{
     official_menu->initialize();
@@ -27,7 +30,7 @@ int main (int argc, char **argv){
     cout << e << endl;
     return 0; // quit the program
   }
-int choice = -1;
+  choice = -1;
   SDL_Event event;
   //handle menu events
   do{
@@ -46,7 +49,7 @@ int choice = -1;
       }
     }
   }while(choice == -1);
-
+  delete official_menu;
   bool game_done = false;
   snake * sn = NULL;
   board * bd = NULL;
@@ -144,8 +147,17 @@ int choice = -1;
       delete po;
     break;
     case 2:
+      SDL_Surface * about = NULL;
+      about = IMG_Load("resources/menu/menu_about.png");
+      SDL_Rect pos;
+      pos.x= 0; pos.y = 0; pos.h = about->h; pos.w = about->w;
+      SDL_BlitSurface(about , NULL, screen, &pos);
+      SDL_Flip(screen);
+      SDL_Delay(5000);
+      SDL_FreeSurface(about);
     break;
   }
+}while(choice > 0); //while the choice of the user is always not a quit button
   SDL_FreeSurface(screen);
   SDL_Quit();
   return 0;
