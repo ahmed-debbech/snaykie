@@ -17,7 +17,7 @@ int main (int argc, char **argv){
   printf("ERROR: Unable to initialize SDL: %s \n",SDL_GetError());
   	return 1;
   }
-  int choice = -1;
+  int choice = 0;
   do{
   screen = SDL_SetVideoMode(500,350,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
   SDL_WM_SetCaption("Snaykie", NULL);
@@ -29,7 +29,7 @@ int main (int argc, char **argv){
     cout << e << endl;
     return 0; // quit the program
   }
-  choice = -1;
+  choice = 0;
   SDL_Event event;
   do{
     official_menu->print(screen);
@@ -46,7 +46,7 @@ int main (int argc, char **argv){
         break;
       }
     }
-  }while(choice == -1);
+  }while(choice <= 0);
   delete official_menu;
   bool game_done = false;
   snake * sn = NULL;

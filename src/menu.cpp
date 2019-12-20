@@ -46,7 +46,7 @@ void Menu :: initialize(){
          ((Button*)w)->setImageHover(buff1);
          ((Button *)w)->setFlag(false);
         ui_components.push_back(w);
-
+    }
         //volume toggle init ====
         buff = IMG_Load("resources/menu/volume_button.png");
         if(buff != NULL){
@@ -57,7 +57,7 @@ void Menu :: initialize(){
            if(buff1 == NULL){
              throw "Can't load resources";
            }
-           w->setAction(3);
+           w->setAction(-1);
            ((Toggle*)w)->setImageClicked(buff1);
            ((Toggle *)w)->setFlag(false);
            ui_components.push_back(w);
@@ -70,10 +70,9 @@ void Menu :: initialize(){
     }else{
       throw "Can't load resources";
     }
-  }else{
-    throw "Can't load resources";
-  }
+
 }
+
 void Menu :: print(SDL_Surface * screen){
   SDL_BlitSurface(background, NULL, screen, &pos);
   for(int i=0; i<=ui_components.size()-1;i++){
@@ -110,10 +109,13 @@ int Menu :: mouseClick(SDL_Event event){
     && (event.button.x >= ui_components[i]->getPos().x))
     && ((event.button.y >= ui_components[i]->getPos().y)
     && (event.button.y <= (ui_components[i]->getPos().y + ui_components[i]->getPos().h)))){
+      if(typeid(*(ui_components[i])) == typeid(Toggle)){
+          ((Toggle*)ui_components[i])->setFlag(true);
+      }
       return ui_components[i]->getAction();
     }
+
   }
   return -1;
 }
-
 };
