@@ -8,20 +8,27 @@
 #include "headers/point.h"
 #include "headers/arbitrator.h"
 #include "headers/menu.h"
+#include "SDL/SDL_mixer.h"
+#include "headers/sound.h"
+
 using namespace std;
 
 int main (int argc, char **argv){
   // screen initialization
   SDL_Surface * screen = NULL;
   if(SDL_Init(SDL_INIT_VIDEO)!=0){
-  printf("ERROR: Unable to initialize SDL: %s \n",SDL_GetError());
+    cout << "ERROR: Unable to initialize SDL" << endl;
   	return 1;
   }
+  //Initialize SDL SOUND
+   if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 ){
+     cout << "ERROR: Unable to initialize SDL SOUNDS" << endl;
+       return 1;
+   }
   int choice = 0;
   do{
   screen = SDL_SetVideoMode(500,350,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
   SDL_WM_SetCaption("Snaykie", NULL);
-
   Ui::Menu * official_menu = new Ui::Menu;
   try{
     official_menu->initialize();
@@ -159,6 +166,7 @@ int main (int argc, char **argv){
   }
 }while(choice > 0); //while the choice of the user is always not a quit button
   SDL_FreeSurface(screen);
+  SDL_CloseAudio();
   SDL_Quit();
   return 0;
 }

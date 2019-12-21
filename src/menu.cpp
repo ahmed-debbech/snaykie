@@ -4,6 +4,7 @@
 #include <typeinfo>
 #include "headers/button.h"
 #include "headers/toggle.h"
+#include "headers/sound.h"
 using namespace std;
 
 namespace Ui{
@@ -87,6 +88,7 @@ Menu :: ~Menu(){
   }
 }
 void Menu :: mouseMotion(SDL_Event event){
+  Sound s;
   for(int i =0; i<= ui_components.size()-1; i++){
     if(((event.motion.x <= (ui_components[i]->getPos().x + ui_components[i]->getPos().w))
     && (event.motion.x >= ui_components[i]->getPos().x))
@@ -94,6 +96,7 @@ void Menu :: mouseMotion(SDL_Event event){
     && (event.motion.y <= (ui_components[i]->getPos().y + ui_components[i]->getPos().h)))){
       if(typeid(*(ui_components[i])) == typeid(Button)){
           ((Button*)ui_components[i])->setFlag(true);
+          s.playSound(PAUSE);
       }
     }else{
       if(typeid(*(ui_components[i])) == typeid(Button)){
