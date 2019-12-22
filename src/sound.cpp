@@ -29,16 +29,6 @@ Sound::Sound(){
     sfx.insert({HOVER, c});
 
     strcpy(path, "resources/sfx/");
-    strcat(path, LOSE);
-    c = Mix_LoadWAV(path);
-    sfx.insert({LOSE, c});
-
-    strcpy(path, "resources/sfx/");
-    strcat(path, PAUSE);
-    c = Mix_LoadWAV(path);
-    sfx.insert({PAUSE, c});
-
-    strcpy(path, "resources/sfx/");
     strcat(path, WALL_HIT);
     c = Mix_LoadWAV(path);
     sfx.insert({WALL_HIT, c});

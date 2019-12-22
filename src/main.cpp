@@ -106,6 +106,9 @@ int main (int argc, char **argv){
               event = event_holder;
               break;
               case SDL_KEYDOWN: firstTime = false;
+              if(event.key.keysym.sym == SDLK_b){
+                game_done = true;
+              }
               break;
           }
           if(firstTime == false){

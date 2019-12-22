@@ -5,8 +5,6 @@
 #define EAT_ITSELF "eatitself.wav"
 #define EAT_POINT "eatpoint.wav"
 #define HOVER "hover.wav"
-#define LOSE "lose.wav"
-#define PAUSE "pause.wav"
 #define WALL_HIT "wallhit.wav"
 
 #include "SDL/SDL_mixer.h"
