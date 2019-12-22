@@ -6,7 +6,6 @@
 #define EAT_POINT "eatpoint.wav"
 #define HOVER "hover.wav"
 #define LOSE "lose.wav"
-#define MOUVEMENT "mouvement.wav"
 #define PAUSE "pause.wav"
 #define WALL_HIT "wallhit.wav"
 

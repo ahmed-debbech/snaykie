@@ -9,7 +9,6 @@
 #include <vector>
 #include <iterator>
 #include "node.h"
-
 using namespace std;
 
 class snake{

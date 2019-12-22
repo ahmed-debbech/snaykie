@@ -34,11 +34,6 @@ Sound::Sound(){
     sfx.insert({LOSE, c});
 
     strcpy(path, "resources/sfx/");
-    strcat(path, MOUVEMENT);
-    c = Mix_LoadWAV(path);
-    sfx.insert({MOUVEMENT, c});
-
-    strcpy(path, "resources/sfx/");
     strcat(path, PAUSE);
     c = Mix_LoadWAV(path);
     sfx.insert({PAUSE, c});
