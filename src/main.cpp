@@ -51,6 +51,14 @@ int main (int argc, char **argv){
         break;
         case SDL_MOUSEBUTTONDOWN:
         choice = official_menu->mouseClick(event,s);
+        //if volume button is pressed
+        if(choice == -1){
+          if(s->getMuted() == true){
+            s->setMuted(false);
+          }else{
+            s->setMuted(true);
+          }
+        }
         break;
       }
     }

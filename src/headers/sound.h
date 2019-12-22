@@ -24,6 +24,7 @@ public:
   void playSound(string chunkName);
   void setFlag(bool s){isPlayed = s;}
   void setMuted(bool y){isMuted = y;}
+  bool getMuted(){return isMuted;}
   ~Sound();
 };
 #endif
