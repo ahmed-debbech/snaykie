@@ -7,6 +7,8 @@
 #include "headers/sound.h"
 using namespace std;
 
+Sound s;
+
 namespace Ui{
 
 void Menu :: initialize(){
@@ -88,7 +90,6 @@ Menu :: ~Menu(){
   }
 }
 void Menu :: mouseMotion(SDL_Event event){
-  Sound s;
   for(int i =0; i<= ui_components.size()-1; i++){
     if(((event.motion.x <= (ui_components[i]->getPos().x + ui_components[i]->getPos().w))
     && (event.motion.x >= ui_components[i]->getPos().x))

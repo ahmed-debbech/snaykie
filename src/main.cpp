@@ -21,7 +21,7 @@ int main (int argc, char **argv){
   	return 1;
   }
   //Initialize SDL SOUND
-   if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 ){
+   if( Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024)==-1){
      cout << "ERROR: Unable to initialize SDL SOUNDS" << endl;
        return 1;
    }
