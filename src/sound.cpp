@@ -5,6 +5,8 @@
 using namespace std;
 
 Sound::Sound(){
+    isPlayed = false;
+    isMuted = false;
     char path [128];
     strcpy(path, "resources/sfx/");
     strcat(path, CLICK);
@@ -55,5 +57,13 @@ Sound::~Sound(){
 void Sound::playSound(string chunkName){
   map<string, Mix_Chunk*> :: iterator it;
   it = sfx.find(chunkName);
-  Mix_PlayChannel(-1,it->second,0);
+  if(isMuted == false){
+    if(it->first == "hover.wav"){
+      if(isPlayed == false){
+        Mix_PlayChannel(-1,it->second,0);
+      }
+    }else{
+      Mix_PlayChannel(-1, it->second, 0);
+    }
+  }
 }

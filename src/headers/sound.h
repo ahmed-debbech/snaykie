@@ -17,9 +17,13 @@ using namespace std;
 
 class Sound{
     map <string, Mix_Chunk*> sfx;
+    bool isPlayed; //to avoid continious play, it halts the sound
+    bool isMuted; //for checking if sound is muted
 public:
   Sound();
   void playSound(string chunkName);
+  void setFlag(bool s){isPlayed = s;}
+  void setMuted(bool y){isMuted = y;}
   ~Sound();
 };
 #endif

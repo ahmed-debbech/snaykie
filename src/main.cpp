@@ -27,6 +27,7 @@ int main (int argc, char **argv){
    }
   int choice = 0;
   do{
+    Sound * s = new Sound();
   screen = SDL_SetVideoMode(500,350,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
   SDL_WM_SetCaption("Snaykie", NULL);
   Ui::Menu * official_menu = new Ui::Menu;
@@ -46,10 +47,10 @@ int main (int argc, char **argv){
         case SDL_QUIT: return 0; //quit game
         break;
         case SDL_MOUSEMOTION:
-        official_menu->mouseMotion(event);
+        official_menu->mouseMotion(event, s);
         break;
         case SDL_MOUSEBUTTONDOWN:
-        choice = official_menu->mouseClick(event);
+        choice = official_menu->mouseClick(event,s);
         break;
       }
     }
@@ -164,6 +165,7 @@ int main (int argc, char **argv){
       SDL_FreeSurface(about);
     break;
   }
+  delete s;
 }while(choice > 0); //while the choice of the user is always not a quit button
   SDL_FreeSurface(screen);
   SDL_CloseAudio();

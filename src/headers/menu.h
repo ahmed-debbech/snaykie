@@ -10,6 +10,7 @@
 #include <vector>
 #include "button.h"
 #include "toggle.h"
+#include "sound.h"
 
 namespace Ui{
 
@@ -20,8 +21,8 @@ class Menu{
 public:
   void initialize();
   void print(SDL_Surface * screen);
-  void mouseMotion(SDL_Event event);
-  int mouseClick(SDL_Event event);
+  void mouseMotion(SDL_Event event, Sound * s);
+  int mouseClick(SDL_Event event, Sound * s);
   ~Menu();
 };
 

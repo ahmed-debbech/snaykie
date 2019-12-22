@@ -4,10 +4,8 @@
 #include <typeinfo>
 #include "headers/button.h"
 #include "headers/toggle.h"
-#include "headers/sound.h"
 using namespace std;
 
-Sound s;
 
 namespace Ui{
 
@@ -89,7 +87,8 @@ Menu :: ~Menu(){
     delete ui_components[i];
   }
 }
-void Menu :: mouseMotion(SDL_Event event){
+void Menu :: mouseMotion(SDL_Event event, Sound * s){
+  bool noMotion = true;
   for(int i =0; i<= ui_components.size()-1; i++){
     if(((event.motion.x <= (ui_components[i]->getPos().x + ui_components[i]->getPos().w))
     && (event.motion.x >= ui_components[i]->getPos().x))
@@ -97,17 +96,22 @@ void Menu :: mouseMotion(SDL_Event event){
     && (event.motion.y <= (ui_components[i]->getPos().y + ui_components[i]->getPos().h)))){
       if(typeid(*(ui_components[i])) == typeid(Button)){
           ((Button*)ui_components[i])->setFlag(true);
-          s.playSound(PAUSE);
       }
+      s->playSound(HOVER);
+      s->setFlag(true);
+      noMotion = false;
     }else{
       if(typeid(*(ui_components[i])) == typeid(Button)){
           ((Button*)ui_components[i])->setFlag(false);
       }
     }
   }
+  if(noMotion == true){
+    s->setFlag(false);
+  }
 }
 
-int Menu :: mouseClick(SDL_Event event){
+int Menu :: mouseClick(SDL_Event event, Sound * s){
   for(int i =0; i<= ui_components.size()-1; i++){
     if(((event.button.x <= (ui_components[i]->getPos().x + ui_components[i]->getPos().w))
     && (event.button.x >= ui_components[i]->getPos().x))
@@ -116,9 +120,9 @@ int Menu :: mouseClick(SDL_Event event){
       if(typeid(*(ui_components[i])) == typeid(Toggle)){
           ((Toggle*)ui_components[i])->setFlag(true);
       }
+      s->playSound(CLICK);
       return ui_components[i]->getAction();
     }
-
   }
   return -1;
 }
