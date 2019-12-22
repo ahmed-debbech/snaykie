@@ -9,7 +9,6 @@
 #include <vector>
 #include <iterator>
 #include "node.h"
-
 using namespace std;
 
 class snake{
@@ -27,12 +26,6 @@ public:
   void showSnake(SDL_Surface * screen);
   int moveSnake(SDL_Event event);
   node getNodes(int);
-  void show(){
-    cout << "************************" << endl;
-    cout << "************************" << endl;
-    for(int i=0;i <= v.size()-1; i++){
-      cout << i << ": " << v[i].getNumberOnMap() << endl;
-    }
-  }
+
 };
 #endif

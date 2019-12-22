@@ -5,8 +5,8 @@
 #include "SDL/SDL_ttf.h"
 #include <vector>
 #include <iterator>
-#include "snake.h"
-#include "node.h"
+#include "headers/snake.h"
+#include "headers/node.h"
 using namespace std;
 
 snake :: snake(){

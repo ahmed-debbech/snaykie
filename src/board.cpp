@@ -5,7 +5,7 @@
 #include "SDL/SDL_ttf.h"
 #include <list>
 #include <iterator>
-#include "board.h"
+#include "headers/board.h"
 using namespace std;
 
 board :: board(){
