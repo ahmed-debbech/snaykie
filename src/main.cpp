@@ -138,16 +138,19 @@ int main (int argc, char **argv){
               sn->addExtraBody();
               sn->setLength(sn->getLength() + 1);
               arb->update_points();
+              s->playSound(EAT_POINT);
             }else{
               if(arb->detectCollWithBoard(*sn)== true){
                 arb->print_gameover(screen);
                 SDL_Flip(screen);
+                s->playSound(WALL_HIT);
                 SDL_Delay(3000);
                 game_done = true;
               }
               if(arb->detectCollWithItself(*sn) == true){
                 arb->print_gameover(screen);
                 SDL_Flip(screen);
+                s->playSound(EAT_ITSELF);
                 SDL_Delay(3000);
                 game_done = true;
               }
