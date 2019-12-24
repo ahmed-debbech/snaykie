@@ -2,3 +2,4 @@ board.o
 point.o
 snake.o
 snaykie
+.vscode/
