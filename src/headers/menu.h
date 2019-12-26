@@ -1,5 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
+#define M_GAME_OVER 2
+#define M_OFFICIAL_MENU 1
 
 #include <iostream>
 #include "widget.h"
@@ -19,7 +21,7 @@ class Menu{
   SDL_Rect pos;
   std::vector <Widget*> ui_components;
 public:
-  void initialize();
+  void initialize(int x);
   void print(SDL_Surface * screen);
   void mouseMotion(SDL_Event event, Sound * s);
   int mouseClick(SDL_Event event, Sound * s);

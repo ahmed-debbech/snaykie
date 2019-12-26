@@ -9,69 +9,113 @@ using namespace std;
 
 namespace Ui{
 
-void Menu :: initialize(){
-  background = IMG_Load("resources/menu/menu_back.png");
-  if(background != NULL){
-    pos.x = 0; pos.y = 0;
-    pos.h = background->h;
-    pos.w = background->w;
-    SDL_Surface * buff = NULL;
-    SDL_Rect posbut;
-    Widget * w = NULL;
-    //play button init ====
-    buff = IMG_Load("resources/menu/play_button.png");
-    if(buff != NULL){
-      posbut.x = 165; posbut.h = buff->h;
-      posbut.y = 180; posbut.w = buff->w;
-      w = new Button("playbutton", posbut, buff);
-      SDL_Surface * buff1 = IMG_Load("resources/menu/play_button_hovered.png");
-      if(buff1 == NULL){
-        throw "Can't load resources";
-      }
-      w->setAction(1);
-      ((Button*)w)->setImageHover(buff1);
-      ((Button *)w)->setFlag(false);
-      ui_components.push_back(w);
-
-      //about button init ====
-      buff = IMG_Load("resources/menu/about_button.png");
+void Menu :: initialize(int x){
+  if(x == 1){
+    background = IMG_Load("resources/menu/menu_back.png");
+    if(background != NULL){
+      pos.x = 0; pos.y = 0;
+      pos.h = background->h;
+      pos.w = background->w;
+      SDL_Surface * buff = NULL;
+      SDL_Rect posbut;
+      Widget * w = NULL;
+      //play button init ====
+      buff = IMG_Load("resources/menu/play_button.png");
       if(buff != NULL){
         posbut.x = 165; posbut.h = buff->h;
-        posbut.y = 257; posbut.w = buff->w;
-         w = new Button("aboutbutton", posbut, buff);
-         SDL_Surface * buff1 = IMG_Load("resources/menu/about_button_hovered.png");
-         if(buff1 == NULL){
-           throw "Can't load resources";
-         }
-         w->setAction(2);
-         ((Button*)w)->setImageHover(buff1);
-         ((Button *)w)->setFlag(false);
+        posbut.y = 180; posbut.w = buff->w;
+        w = new Button("playbutton", posbut, buff);
+        SDL_Surface * buff1 = IMG_Load("resources/menu/play_button_hovered.png");
+        if(buff1 == NULL){
+          throw "Can't load resources";
+        }
+        w->setAction(1);
+        ((Button*)w)->setImageHover(buff1);
+        ((Button *)w)->setFlag(false);
         ui_components.push_back(w);
-    }
-        //volume toggle init ====
-        buff = IMG_Load("resources/menu/volume_button.png");
+
+        //about button init ====
+        buff = IMG_Load("resources/menu/about_button.png");
         if(buff != NULL){
-          posbut.x = 469; posbut.h = buff->h;
-          posbut.y = 326; posbut.w = buff->w;
-           w = new Toggle("volumetoggle", posbut, buff);
-           SDL_Surface * buff1 = IMG_Load("resources/menu/volume_button_muted.png");
-           if(buff1 == NULL){
-             throw "Can't load resources";
-           }
-           w->setAction(-1);
-           ((Toggle*)w)->setImageClicked(buff1);
-           ((Toggle *)w)->setFlag(false);
-           ui_components.push_back(w);
+          posbut.x = 165; posbut.h = buff->h;
+          posbut.y = 257; posbut.w = buff->w;
+          w = new Button("aboutbutton", posbut, buff);
+          SDL_Surface * buff1 = IMG_Load("resources/menu/about_button_hovered.png");
+          if(buff1 == NULL){
+            throw "Can't load resources";
+          }
+          w->setAction(2);
+          ((Button*)w)->setImageHover(buff1);
+          ((Button *)w)->setFlag(false);
+          ui_components.push_back(w);
+      }
+          //volume toggle init ====
+          buff = IMG_Load("resources/menu/volume_button.png");
+          if(buff != NULL){
+            posbut.x = 469; posbut.h = buff->h;
+            posbut.y = 326; posbut.w = buff->w;
+            w = new Toggle("volumetoggle", posbut, buff);
+            SDL_Surface * buff1 = IMG_Load("resources/menu/volume_button_muted.png");
+            if(buff1 == NULL){
+              throw "Can't load resources";
+            }
+            w->setAction(-1);
+            ((Toggle*)w)->setImageClicked(buff1);
+            ((Toggle *)w)->setFlag(false);
+            ui_components.push_back(w);
+          }else{
+            throw "Can't load resources";
+          }
         }else{
           throw "Can't load resources";
         }
       }else{
         throw "Can't load resources";
       }
-    }else{
-      throw "Can't load resources";
-    }
+  }else{
+    if(x == 2){
+       background = IMG_Load("resources/menu/gameover_menu.png");
+      if(background != NULL){
+        pos.x = 0; pos.y = 0;
+        pos.h = background->h;
+        pos.w = background->w;
+        SDL_Surface * buff = NULL;
+        SDL_Rect posbut;
+        Widget * w = NULL;
+        //try again button init ====
+        buff = IMG_Load("resources/menu/tryagain_button.png");
+        if(buff != NULL){
+          posbut.x = 35; posbut.h = buff->h;
+          posbut.y = 141; posbut.w = buff->w;
+          w = new Button("tryagainbutton", posbut, buff);
+          SDL_Surface * buff1 = IMG_Load("resources/menu/tryagain_button.png");
+          if(buff1 == NULL){
+            throw "Can't load resources";
+          }
+          w->setAction(1);
+          ((Button*)w)->setImageHover(buff1);
+          ((Button *)w)->setFlag(false);
+          ui_components.push_back(w);
 
+          //go back button init ====
+          buff = IMG_Load("resources/menu/goback_button.png");
+          if(buff != NULL){
+            posbut.x = 35; posbut.h = buff->h;
+            posbut.y = 170; posbut.w = buff->w;
+            w = new Button("gobackbutton", posbut, buff);
+            SDL_Surface * buff1 = IMG_Load("resources/menu/goback_button_hovered.png");
+            if(buff1 == NULL){
+              throw "Can't load resources";
+            }
+            w->setAction(2);
+            ((Button*)w)->setImageHover(buff1);
+            ((Button *)w)->setFlag(false);
+            ui_components.push_back(w);
+          }
+    }
+  }
+}
+}
 }
 
 void Menu :: print(SDL_Surface * screen){

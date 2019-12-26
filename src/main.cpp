@@ -32,7 +32,7 @@ int main (int argc, char **argv){
   SDL_WM_SetCaption("Snaykie", NULL);
   Ui::Menu * official_menu = new Ui::Menu;
   try{
-    official_menu->initialize();
+    official_menu->initialize(M_OFFICIAL_MENU);
   }catch(string e){
     cout << e << endl;
     return 0; // quit the program
@@ -144,17 +144,15 @@ int main (int argc, char **argv){
               s->playSound(EAT_POINT);
             }else{
               if(arb->detectCollWithBoard(*sn)== true){
-                arb->print_gameover(screen);
+                 s->playSound(WALL_HIT);
+                arb->print_gameover_menu(screen,event);
                 SDL_Flip(screen);
-                s->playSound(WALL_HIT);
-                SDL_Delay(3000);
                 game_done = true;
               }
               if(arb->detectCollWithItself(*sn) == true){
-                arb->print_gameover(screen);
-                SDL_Flip(screen);
                 s->playSound(EAT_ITSELF);
-                SDL_Delay(3000);
+                arb->print_gameover_menu(screen,event);
+                SDL_Flip(screen);
                 game_done = true;
               }
             }

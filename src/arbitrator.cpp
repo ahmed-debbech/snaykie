@@ -7,12 +7,13 @@
 #include <iterator>
 #include "headers/arbitrator.h"
 #include "headers/snake.h"
+#include "headers/sound.h"
 
 using namespace std;
 
 arbitrator :: arbitrator(){
   pointScore = 0;
-  gameover = IMG_Load("resources/gameover.png");
+  m.initialize(M_GAME_OVER);
 }
 bool arbitrator :: eat_check(int snake_pos, int point_pos){
   if(snake_pos == point_pos){
@@ -47,13 +48,32 @@ void arbitrator :: print_points_on_board(SDL_Surface * screen){
 void arbitrator :: update_points(){
   pointScore++;
 }
-void arbitrator :: print_gameover(SDL_Surface * screen){
-  SDL_Rect pos;
-  pos.x = 112;
-  pos.y = 277;
-  pos.h = gameover->h;
-  pos.w = gameover->w;
-    SDL_BlitSurface(gameover, NULL, screen, &pos);
+int arbitrator :: print_gameover_menu(SDL_Surface * screen){
+  try{
+    m.initialize(M_GAME_OVER);
+  }catch(string s){
+    cout << "ERROR: " << s << endl;
+    return 0;
+  }
+  int choice = 0;
+  Sound * s = new Sound();
+  SDL_Event event;
+  do{
+    SDL_PollEvent(event);
+    m.print(screen);
+    switch(event.type){
+      case SDL_QUIT: return 0;
+      break;
+      case SDL_MOUSEMOTION:
+            m.mouseMotion(event,s);
+      break;
+      case SDL_MOUSEBUTTONDOWN:
+            choice = m.mouseClick(event, s);
+      break;
+    }
+  }while(choice <= 0);
+  delete s;
+  return choice;
 }
 bool arbitrator :: detectCollWithBoard(snake& s){
   SDL_Rect head_pos;

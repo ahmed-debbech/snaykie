@@ -13,17 +13,19 @@
 #include <iterator>
 #include "board.h"
 #include "snake.h"
+#include "menu.h"
+
 using namespace std;
 
 class arbitrator{
-  SDL_Surface * gameover;
+  Ui::Menu m;
   int pointScore;
 public:
   arbitrator();
   bool eat_check(int snake_pos, int point_pos);
   void print_points_on_board(SDL_Surface * screen);
   void update_points();
-  void print_gameover(SDL_Surface * screen);
+  int print_gameover_menu(SDL_Surface * screen);
   bool detectCollWithBoard(snake&);
   bool detectCollWithItself(snake & );
 };
