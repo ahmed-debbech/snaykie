@@ -76,7 +76,7 @@ void Menu :: initialize(int x){
     if(x == 2){
        background = IMG_Load("resources/menu/gameover_menu.png");
       if(background != NULL){
-        pos.x = 0; pos.y = 0;
+        pos.x = 65; pos.y = 360;
         pos.h = background->h;
         pos.w = background->w;
         SDL_Surface * buff = NULL;
@@ -85,10 +85,10 @@ void Menu :: initialize(int x){
         //try again button init ====
         buff = IMG_Load("resources/menu/tryagain_button.png");
         if(buff != NULL){
-          posbut.x = 35; posbut.h = buff->h;
-          posbut.y = 141; posbut.w = buff->w;
+          posbut.x = pos.x + 55; posbut.h = buff->h;
+          posbut.y = pos.y + 125; posbut.w = buff->w;
           w = new Button("tryagainbutton", posbut, buff);
-          SDL_Surface * buff1 = IMG_Load("resources/menu/tryagain_button.png");
+          SDL_Surface * buff1 = IMG_Load("resources/menu/tryagain_button_hover.png");
           if(buff1 == NULL){
             throw "Can't load resources";
           }
@@ -100,10 +100,10 @@ void Menu :: initialize(int x){
           //go back button init ====
           buff = IMG_Load("resources/menu/goback_button.png");
           if(buff != NULL){
-            posbut.x = 35; posbut.h = buff->h;
-            posbut.y = 170; posbut.w = buff->w;
+            posbut.x = pos.x + 55; posbut.h = buff->h;
+            posbut.y = pos.y + 185; posbut.w = buff->w;
             w = new Button("gobackbutton", posbut, buff);
-            SDL_Surface * buff1 = IMG_Load("resources/menu/goback_button_hovered.png");
+            SDL_Surface * buff1 = IMG_Load("resources/menu/goback_button_hover.png");
             if(buff1 == NULL){
               throw "Can't load resources";
             }

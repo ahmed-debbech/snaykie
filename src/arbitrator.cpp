@@ -59,8 +59,9 @@ int arbitrator :: print_gameover_menu(SDL_Surface * screen){
   Sound * s = new Sound();
   SDL_Event event;
   do{
-    SDL_PollEvent(event);
+    SDL_PollEvent(&event);
     m.print(screen);
+    SDL_Flip(screen);
     switch(event.type){
       case SDL_QUIT: return 0;
       break;
@@ -71,6 +72,7 @@ int arbitrator :: print_gameover_menu(SDL_Surface * screen){
             choice = m.mouseClick(event, s);
       break;
     }
+    while(SDL_PollEvent(&event) != 0);
   }while(choice <= 0);
   delete s;
   return choice;

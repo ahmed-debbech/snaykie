@@ -145,14 +145,12 @@ int main (int argc, char **argv){
             }else{
               if(arb->detectCollWithBoard(*sn)== true){
                  s->playSound(WALL_HIT);
-                arb->print_gameover_menu(screen,event);
-                SDL_Flip(screen);
+                arb->print_gameover_menu(screen);
                 game_done = true;
               }
               if(arb->detectCollWithItself(*sn) == true){
                 s->playSound(EAT_ITSELF);
-                arb->print_gameover_menu(screen,event);
-                SDL_Flip(screen);
+                arb->print_gameover_menu(screen);
                 game_done = true;
               }
             }
