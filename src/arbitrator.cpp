@@ -48,7 +48,7 @@ void arbitrator :: print_points_on_board(SDL_Surface * screen){
 void arbitrator :: update_points(){
   pointScore++;
 }
-int arbitrator :: print_gameover_menu(SDL_Surface * screen){
+int arbitrator :: print_gameover_menu(SDL_Surface * screen, Sound* s){
   try{
     m.initialize(M_GAME_OVER);
   }catch(string s){
@@ -56,7 +56,6 @@ int arbitrator :: print_gameover_menu(SDL_Surface * screen){
     return 0;
   }
   int choice = 0;
-  Sound * s = new Sound();
   SDL_Event event;
   do{
     SDL_PollEvent(&event);
@@ -74,7 +73,6 @@ int arbitrator :: print_gameover_menu(SDL_Surface * screen){
     }
     while(SDL_PollEvent(&event) != 0);
   }while(choice <= 0);
-  delete s;
   return choice;
 }
 bool arbitrator :: detectCollWithBoard(snake& s){

@@ -14,6 +14,7 @@
 #include "board.h"
 #include "snake.h"
 #include "menu.h"
+#include "sound.h"
 
 using namespace std;
 
@@ -25,7 +26,7 @@ public:
   bool eat_check(int snake_pos, int point_pos);
   void print_points_on_board(SDL_Surface * screen);
   void update_points();
-  int print_gameover_menu(SDL_Surface * screen);
+  int print_gameover_menu(SDL_Surface * screen, Sound*s);
   bool detectCollWithBoard(snake&);
   bool detectCollWithItself(snake & );
 };

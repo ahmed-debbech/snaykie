@@ -28,52 +28,54 @@ int main (int argc, char **argv){
   int choice = 0;
   do{
     Sound * s = new Sound();
-  screen = SDL_SetVideoMode(500,350,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
-  SDL_WM_SetCaption("Snaykie", NULL);
-  Ui::Menu * official_menu = new Ui::Menu;
-  try{
-    official_menu->initialize(M_OFFICIAL_MENU);
-  }catch(string e){
-    cout << e << endl;
-    return 0; // quit the program
-  }
-  choice = 0;
-  SDL_Event event;
-  do{
-    official_menu->print(screen);
-    SDL_Flip(screen);
-    while(SDL_PollEvent(&event) == 1){
-      switch(event.type){
-        case SDL_QUIT: return 0; //quit game
-        break;
-        case SDL_MOUSEMOTION:
-        official_menu->mouseMotion(event, s);
-        break;
-        case SDL_MOUSEBUTTONDOWN:
-        choice = official_menu->mouseClick(event,s);
-        //if volume button is pressed
-        if(choice == -1){
-          if(s->getMuted() == true){
-            s->setMuted(false);
-          }else{
-            s->setMuted(true);
+    if(choice == 0){
+      screen = SDL_SetVideoMode(500,350,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
+      SDL_WM_SetCaption("Snaykie", NULL);
+      Ui::Menu * official_menu = new Ui::Menu;
+      try{
+        official_menu->initialize(M_OFFICIAL_MENU);
+      }catch(string e){
+        cout << e << endl;
+        return 0; // quit the program
+      }
+      choice = 0;
+      SDL_Event event;
+      do{
+        official_menu->print(screen);
+        SDL_Flip(screen);
+        while(SDL_PollEvent(&event) == 1){
+          switch(event.type){
+            case SDL_QUIT: return 0; //quit game
+            break;
+            case SDL_MOUSEMOTION:
+            official_menu->mouseMotion(event, s);
+            break;
+            case SDL_MOUSEBUTTONDOWN:
+            choice = official_menu->mouseClick(event,s);
+            //if volume button is pressed
+            if(choice == -1){
+              if(s->getMuted() == true){
+                s->setMuted(false);
+              }else{
+                s->setMuted(true);
+              }
+            }
+            break;
           }
         }
-        break;
-      }
-    }
-  }while(choice <= 0);
-  delete official_menu;
+      }while(choice <= 0);
+      delete official_menu;
+  }
   bool game_done = false;
   snake * sn = NULL;
   board * bd = NULL;
   arbitrator * arb = NULL;
   point * po = NULL;
   int mouvement = -1;
+  SDL_Event event;
   SDL_Event event_holder;
   int dir;
   bool firstTime = true;
-
   switch(choice){
     case 1:
       //begin game play initialization
@@ -143,16 +145,26 @@ int main (int argc, char **argv){
               arb->update_points();
               s->playSound(EAT_POINT);
             }else{
+              int h = -1;
               if(arb->detectCollWithBoard(*sn)== true){
                  s->playSound(WALL_HIT);
-                arb->print_gameover_menu(screen);
-                game_done = true;
+                h = arb->print_gameover_menu(screen,s);
               }
               if(arb->detectCollWithItself(*sn) == true){
                 s->playSound(EAT_ITSELF);
-                arb->print_gameover_menu(screen);
-                game_done = true;
+                arb->print_gameover_menu(screen,s);
               }
+              if(h == 0){
+                  return 0;
+                }else{
+                  if(h == 1){ // try again 
+                    game_done = true; choice =1;
+                  }else{
+                    if(h == 2){ //go back to menu
+                      game_done = true; choice =0;
+                    }
+                  }
+                }
             }
             SDL_Flip(screen);
             SDL_Delay(200);
@@ -176,7 +188,7 @@ int main (int argc, char **argv){
     break;
   }
   delete s;
-}while(choice > 0); //while the choice of the user is always not a quit button
+}while(choice >= 0); //while the choice of the user is always not a quit button
   SDL_FreeSurface(screen);
   SDL_CloseAudio();
   SDL_Quit();
