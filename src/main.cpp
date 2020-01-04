@@ -184,6 +184,7 @@ int main (int argc, char **argv){
       SDL_BlitSurface(about , NULL, screen, &pos);
       SDL_Flip(screen);
       SDL_Delay(5000);
+      choice = 0;
       SDL_FreeSurface(about);
     break;
   }
