@@ -152,7 +152,7 @@ int main (int argc, char **argv){
               }
               if(arb->detectCollWithItself(*sn) == true){
                 s->playSound(EAT_ITSELF);
-                arb->print_gameover_menu(screen,s);
+                h = arb->print_gameover_menu(screen,s);
               }
               if(h == 0){
                   return 0;
