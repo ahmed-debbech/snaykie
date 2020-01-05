@@ -27,6 +27,7 @@ snake :: snake(){
       pos.y = y;
       n.setPosition(pos);
       n.setBodyImage(head);
+      n.setBodyType(0);
       n.setDirection('l');
       n.setNextDirection('h');
       n.setNumberOnMap(numberOnMap);
@@ -40,6 +41,7 @@ snake :: snake(){
         pos.y = y;
         n.setPosition(pos);
         n.setBodyImage(tail);
+        n.setBodyType(0);
         n.setDirection('l');
         n.setNextDirection('l');
         n.setNumberOnMap(numberOnMap);
@@ -56,10 +58,12 @@ snake :: snake(){
           whatColor = 2;
         }else{
           n.setBodyImage(body);
+          n.setBodyType(whatColor);
           whatColor = 1;
         }
         n.setDirection('l');
         n.setNextDirection('l');
+        n.setBodyType(whatColor);
         n.setNumberOnMap(numberOnMap);
         v.push_back(n);
         x = x + 41;
@@ -219,8 +223,14 @@ return z;
 }
 void snake :: addExtraBody(){
   node n,last;
-  n.setBodyImage(IMG_Load("resources/body.png"));
-  last=v[length-1];
+  if(v[length-2].getBodyType() == 1){
+    n.setBodyImage(IMG_Load("resources/body.png"));
+    n.setBodyType(2);
+  }else{
+    n.setBodyImage(IMG_Load("resources/body2.png"));
+    n.setBodyType(1);
+  }
+  last=v[length-2];
   n.setNextDirection(last.getDirection());
   n.setDirection(last.getDirection());
   update_nodes_num_on_map(n, last);
@@ -239,7 +249,11 @@ void snake :: addExtraBody(){
               n.setPosition(pos);
     break;
   }
-  v.push_back(n);
+  vector <node> :: iterator it = v.begin();
+  for(int i=0; i<=length-2; i++){
+    it++;
+  }
+  v.insert(it,n);
 }
 node snake ::  getNodes(int counter){
   return v[counter];
