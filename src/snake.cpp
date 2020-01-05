@@ -13,9 +13,12 @@ snake :: snake(){
    int i, numberOnMap = 213;
   float x = 387.4;
   float y = 778.4;
+  int whatColor = 1;
   length = 3;
   SDL_Surface * body = IMG_Load("resources/body.png");
+  SDL_Surface * body2 = IMG_Load("resources/body2.png");
   SDL_Surface * head = IMG_Load("resources/head.png");
+  SDL_Surface * tail = IMG_Load("resources/tail.png");
   for(i = 0; i <= length-1; i++){
     if(i == 0){
       node n;
@@ -30,17 +33,37 @@ snake :: snake(){
       v.push_back(n);
       x = x + 41;
     }else{
-      node n;
-      SDL_Rect pos;
-      pos.x = x;
-      pos.y = y;
-      n.setPosition(pos);
-      n.setBodyImage(body);
-      n.setDirection('l');
-      n.setNextDirection('l');
-      n.setNumberOnMap(numberOnMap);
-      v.push_back(n);
-      x = x + 41;
+      if(i == length-1){
+        node n;
+        SDL_Rect pos;
+        pos.x = x;
+        pos.y = y;
+        n.setPosition(pos);
+        n.setBodyImage(tail);
+        n.setDirection('l');
+        n.setNextDirection('l');
+        n.setNumberOnMap(numberOnMap);
+        v.push_back(n);
+        x = x + 41;
+      }else{
+        node n;
+        SDL_Rect pos;
+        pos.x = x;
+        pos.y = y;
+        n.setPosition(pos);
+        if(whatColor = 1){
+          n.setBodyImage(body2);
+          whatColor = 2;
+        }else{
+          n.setBodyImage(body);
+          whatColor = 1;
+        }
+        n.setDirection('l');
+        n.setNextDirection('l');
+        n.setNumberOnMap(numberOnMap);
+        v.push_back(n);
+        x = x + 41;
+      }
     }
     numberOnMap++;
   }
