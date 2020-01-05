@@ -13,7 +13,7 @@ snake :: snake(){
    int i, numberOnMap = 213;
   float x = 387.4;
   float y = 778.4;
-  int whatColor = 1;
+  int whatColor = 2;
   length = 3;
   SDL_Surface * body = IMG_Load("resources/body.png");
   SDL_Surface * body2 = IMG_Load("resources/body2.png");
@@ -53,17 +53,17 @@ snake :: snake(){
         pos.x = x;
         pos.y = y;
         n.setPosition(pos);
-        if(whatColor = 1){
-          n.setBodyImage(body2);
+        if(whatColor == 1){
+          n.setBodyImage(body);
+          n.setBodyType(1);
           whatColor = 2;
         }else{
-          n.setBodyImage(body);
-          n.setBodyType(whatColor);
+          n.setBodyImage(body2);
+          n.setBodyType(2);
           whatColor = 1;
         }
         n.setDirection('l');
         n.setNextDirection('l');
-        n.setBodyType(whatColor);
         n.setNumberOnMap(numberOnMap);
         v.push_back(n);
         x = x + 41;
@@ -71,6 +71,10 @@ snake :: snake(){
     }
     numberOnMap++;
   }
+  for(int i =0; i<=length-1; i++){
+    cout << v[i].getBodyType() , " ";
+  }
+  cout << endl;
 }
 void snake :: setLength(int length){
   this->length = length;
@@ -223,11 +227,15 @@ return z;
 }
 void snake :: addExtraBody(){
   node n,last;
+  for(int i=0; i<=length-1; i++){
+    cout << v[i].getBodyType(), " ";
+  }
+  cout << endl;
   if(v[length-2].getBodyType() == 1){
-    n.setBodyImage(IMG_Load("resources/body.png"));
+    n.setBodyImage(IMG_Load("resources/body2.png"));
     n.setBodyType(2);
   }else{
-    n.setBodyImage(IMG_Load("resources/body2.png"));
+    n.setBodyImage(IMG_Load("resources/body.png"));
     n.setBodyType(1);
   }
   last=v[length-2];
@@ -251,7 +259,8 @@ void snake :: addExtraBody(){
   }
   vector <node> :: iterator it = v.begin();
   for(int i=0; i<=length-2; i++){
-    it++;
+    cout << it->getBodyType() <<endl;
+    ++it;
   }
   v.insert(it,n);
 }

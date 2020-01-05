@@ -14,7 +14,7 @@ class node{
   SDL_Rect position;
   int numberOfPosOnMap;
   SDL_Surface * body;
-  int bodyType; //1 for red, 2 for yellow
+  int bodyType; //1 for yellow, 2 for red
   char dir; 
   char nextDir;
 public:
