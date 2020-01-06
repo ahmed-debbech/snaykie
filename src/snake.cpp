@@ -71,10 +71,6 @@ snake :: snake(){
     }
     numberOnMap++;
   }
-  for(int i =0; i<=length-1; i++){
-    cout << v[i].getBodyType() , " ";
-  }
-  cout << endl;
 }
 void snake :: setLength(int length){
   this->length = length;
@@ -114,6 +110,9 @@ void snake :: update_nodes_num_on_map(node& n, const node& last_node){
     case 'l': n.setNumberOnMap(last + 1);
     break;
   }
+}
+void transformSnake(node * n){
+  
 }
 int snake :: moveSnake(SDL_Event event){
   int z;
@@ -259,7 +258,6 @@ void snake :: addExtraBody(){
   }
   vector <node> :: iterator it = v.begin();
   for(int i=0; i<=length-2; i++){
-    cout << it->getBodyType() <<endl;
     ++it;
   }
   v.insert(it,n);
