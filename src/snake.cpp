@@ -111,7 +111,7 @@ void snake :: update_nodes_num_on_map(node& n, const node& last_node){
     break;
   }
 }
-void transformSnake(node * n){
+void snake :: transformNode(node * n){
   
 }
 int snake :: moveSnake(SDL_Event event){
@@ -224,12 +224,25 @@ int snake :: moveSnake(SDL_Event event){
 }
 return z;
 }
+void snake :: pushTailNode(){
+  node last = v[length-1];
+  SDL_Rect pos;
+  pos.x= last.getPosition().x;
+  pos.y = last.getPosition().y;
+  switch(last.getDirection()){
+    case 'u': pos.y += 43;
+    break;
+    case 'd': pos.y -= 43;
+    break;
+    case 'r': pos.x -= 41;
+    break;
+    case 'l': pos.x += 41;
+    break;
+  }
+  v[length].setPosition(pos);
+}
 void snake :: addExtraBody(){
   node n,last;
-  for(int i=0; i<=length-1; i++){
-    cout << v[i].getBodyType(), " ";
-  }
-  cout << endl;
   if(v[length-2].getBodyType() == 1){
     n.setBodyImage(IMG_Load("resources/body2.png"));
     n.setBodyType(2);
@@ -261,6 +274,7 @@ void snake :: addExtraBody(){
     ++it;
   }
   v.insert(it,n);
+  pushTailNode();
 }
 node snake ::  getNodes(int counter){
   return v[counter];
