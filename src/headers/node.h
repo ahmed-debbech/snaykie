@@ -14,7 +14,6 @@ class node{
   SDL_Rect position;
   int numberOfPosOnMap;
   SDL_Surface * body;
-  int bodyType; //1 for yellow, 2 for red
   char dir; 
   char nextDir;
 public:
@@ -26,8 +25,6 @@ public:
   void setDirection(char dir);
   void setBodyImage(SDL_Surface * body);
   SDL_Surface * getBodyImage();
-  void setBodyType(int bt){bodyType = bt;}
-  int getBodyType(){ return bodyType;}
   void setNumberOnMap(int num){this->numberOfPosOnMap = num;}
   int getNumberOnMap(){
     return numberOfPosOnMap;

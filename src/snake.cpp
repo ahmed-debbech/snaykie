@@ -13,10 +13,8 @@ snake :: snake(){
    int i, numberOnMap = 213;
   float x = 387.4;
   float y = 778.4;
-  int whatColor = 2;
   length = 3;
   SDL_Surface * body = IMG_Load("resources/body.png");
-  SDL_Surface * body2 = IMG_Load("resources/body2.png");
   SDL_Surface * head = IMG_Load("resources/head.png");
   SDL_Surface * tail = IMG_Load("resources/tail.png");
   for(i = 0; i <= length-1; i++){
@@ -27,7 +25,6 @@ snake :: snake(){
       pos.y = y;
       n.setPosition(pos);
       n.setBodyImage(head);
-      n.setBodyType(0);
       n.setDirection('l');
       n.setNextDirection('h');
       n.setNumberOnMap(numberOnMap);
@@ -41,7 +38,6 @@ snake :: snake(){
         pos.y = y;
         n.setPosition(pos);
         n.setBodyImage(tail);
-        n.setBodyType(0);
         n.setDirection('l');
         n.setNextDirection('l');
         n.setNumberOnMap(numberOnMap);
@@ -53,15 +49,7 @@ snake :: snake(){
         pos.x = x;
         pos.y = y;
         n.setPosition(pos);
-        if(whatColor == 1){
-          n.setBodyImage(body);
-          n.setBodyType(1);
-          whatColor = 2;
-        }else{
-          n.setBodyImage(body2);
-          n.setBodyType(2);
-          whatColor = 1;
-        }
+        n.setBodyImage(body);
         n.setDirection('l');
         n.setNextDirection('l');
         n.setNumberOnMap(numberOnMap);
@@ -149,11 +137,7 @@ void snake :: transformNode(node * n){
       break;
     }
   }else{
-    if(n->getBodyType() == 1){
-      n->setBodyImage(IMG_Load("resources/body.png"));
-    }else{
-      n->setBodyImage(IMG_Load("resources/body2.png"));
-    }
+    n->setBodyImage(IMG_Load("resources/body.png"));
   }
 }
 int snake :: moveSnake(SDL_Event event){
@@ -288,13 +272,6 @@ void snake :: pushTailNode(){
 }
 void snake :: addExtraBody(){
   node n,last;
-  if(v[length-2].getBodyType() == 1){
-    n.setBodyImage(IMG_Load("resources/body2.png"));
-    n.setBodyType(2);
-  }else{
-    n.setBodyImage(IMG_Load("resources/body.png"));
-    n.setBodyType(1);
-  }
   last=v[length-2];
   n.setNextDirection(last.getDirection());
   n.setDirection(last.getDirection());
