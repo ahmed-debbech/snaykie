@@ -14,9 +14,9 @@ snake :: snake(){
   float x = 387.4;
   float y = 778.4;
   length = 3;
-  SDL_Surface * body = IMG_Load("resources/body.png");
-  SDL_Surface * head = IMG_Load("resources/head.png");
-  SDL_Surface * tail = IMG_Load("resources/tail.png");
+  SDL_Surface * body = IMG_Load("resources/snake/bodyleft.png");
+  SDL_Surface * head = IMG_Load("resources/snake/headleft.png");
+  SDL_Surface * tail = IMG_Load("resources/snake/tailleft.png");
   for(i = 0; i <= length-1; i++){
     if(i == 0){
       node n;
@@ -99,45 +99,70 @@ void snake :: update_nodes_num_on_map(node& n, const node& last_node){
     break;
   }
 }
-void snake :: transformNode(node * n){
+void snake :: transformNode(node * n, int i){
   SDL_FreeSurface(n->getBodyImage());
-  if(n->getNextDirection() != n->getDirection()){
-    switch(n->getDirection()){
-      case 'u':
-        switch(n->getNextDirection()){
-          case 'l': n->setBodyImage(IMG_Load("resources/downtoleft.png"));
-          break;
-          case 'r': n->setBodyImage(IMG_Load("resources/downtoright.png"));
-          break;
-        }
-      break;
-      case 'd':
-        switch(n->getNextDirection()){
-          case 'l': n->setBodyImage(IMG_Load("resources/uptoleft.png"));
-          break;
-          case 'r': n->setBodyImage(IMG_Load("resources/uptoright.png"));
-          break;
-        }
-      break;
-      case 'r':
-        switch(n->getNextDirection()){
-          case 'u': n->setBodyImage(IMG_Load("resources/lefttoup.png"));
-          break;
-          case 'd': n->setBodyImage(IMG_Load("resources/lefttodown.png"));
-          break;
-        }
-      break;
-      case 'l':
-        switch(n->getNextDirection()){
-          case 'u': n->setBodyImage(IMG_Load("resources/righttoup.png"));
-          break;
-          case 'd': n->setBodyImage(IMG_Load("resources/righttodown.png"));
-          break;
-        }
-      break;
+  if(i != 0){
+    if(n->getNextDirection() != n->getDirection()){
+      switch(n->getDirection()){
+        case 'u':
+          switch(n->getNextDirection()){
+            case 'l': n->setBodyImage(IMG_Load("resources/snake/downtoleft.png"));
+            break;
+            case 'r': n->setBodyImage(IMG_Load("resources/snake/downtoright.png"));
+            break;
+          }
+        break;
+        case 'd':
+          switch(n->getNextDirection()){
+            case 'l': n->setBodyImage(IMG_Load("resources/snake/uptoleft.png"));
+            break;
+            case 'r': n->setBodyImage(IMG_Load("resources/snake/uptoright.png"));
+            break;
+          }
+        break;
+        case 'r':
+          switch(n->getNextDirection()){
+            case 'u': n->setBodyImage(IMG_Load("resources/snake/lefttoup.png"));
+            break;
+            case 'd': n->setBodyImage(IMG_Load("resources/snake/lefttodown.png"));
+            break;
+          }
+        break;
+        case 'l':
+          switch(n->getNextDirection()){
+            case 'u': n->setBodyImage(IMG_Load("resources/snake/righttoup.png"));
+            break;
+            case 'd': n->setBodyImage(IMG_Load("resources/snake/righttodown.png"));
+            break;
+          }
+        break;
+      }
     }
   }else{
-    n->setBodyImage(IMG_Load("resources/body.png"));
+  if(i==0){ //this node is head
+      switch(n->getDirection()){
+        case 'u': n->setBodyImage(IMG_Load("resources/snake/headup.png")); break;
+        case 'd': n->setBodyImage(IMG_Load("resources/snake/headdown.png")); break;
+        case 'l': n->setBodyImage(IMG_Load("resources/snake/headleft.png")); break;
+        case 'r': n->setBodyImage(IMG_Load("resources/snake/headright.png")); break;
+      }
+    }else{
+      if(i == length-1){ //this node is tail
+        switch(n->getDirection()){
+          case 'u': n->setBodyImage(IMG_Load("resources/snake/tailup.png")); break;
+          case 'd': n->setBodyImage(IMG_Load("resources/snake/taildown.png")); break;
+          case 'l': n->setBodyImage(IMG_Load("resources/snake/tailleft.png")); break;
+          case 'r': n->setBodyImage(IMG_Load("resources/snake/tailright.png")); break;
+        }
+      }else{
+        switch(n->getDirection()){
+          case 'u': n->setBodyImage(IMG_Load("resources/snake/bodyup.png")); break;
+          case 'd': n->setBodyImage(IMG_Load("resources/snake/bodydown.png")); break;
+          case 'l': n->setBodyImage(IMG_Load("resources/snake/bodyleft.png")); break;
+          case 'r': n->setBodyImage(IMG_Load("resources/snake/bodyright.png")); break;
+        }
+      }
+    }
   }
 }
 int snake :: moveSnake(SDL_Event event){
@@ -217,6 +242,7 @@ int snake :: moveSnake(SDL_Event event){
     }
   }
   if(z != -1){
+    transformNode(&v[0], 0); // transform head node
   for(int i = 1; i <= length-1; i++){
     v[i].setDirection(v[i].getNextDirection());
     switch(v[i].getDirection()){
@@ -246,9 +272,7 @@ int snake :: moveSnake(SDL_Event event){
       break;
     }
     v[i].setNextDirection(v[i-1].getDirection());
-    if(i != length-1){ //if it is NOT the tail
-      transformNode(&v[i]);
-    }
+     transformNode(&v[i],i);
   }
 }
 return z;

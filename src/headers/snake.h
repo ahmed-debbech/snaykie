@@ -18,7 +18,7 @@ class snake{
   int pos_head_snake_on_map;
   void update_nodes_num_on_map(char, node&);
   void update_nodes_num_on_map(node&, const node&);
-  void transformNode(node * n);
+  void transformNode(node * n, int i);
   void pushTailNode();
 public:
   snake();
