@@ -105,17 +105,17 @@ void snake :: transformNode(node * n){
     switch(n->getDirection()){
       case 'u':
         switch(n->getNextDirection()){
-          case 'l': n->setBodyImage(IMG_Load("resources/uptoleft.png"));
+          case 'l': n->setBodyImage(IMG_Load("resources/downtoleft.png"));
           break;
-          case 'r': n->setBodyImage(IMG_Load("resources/uptoright.png"));
+          case 'r': n->setBodyImage(IMG_Load("resources/downtoright.png"));
           break;
         }
       break;
       case 'd':
         switch(n->getNextDirection()){
-          case 'l': n->setBodyImage(IMG_Load("resources/downtoleft.png"));
+          case 'l': n->setBodyImage(IMG_Load("resources/uptoleft.png"));
           break;
-          case 'r': n->setBodyImage(IMG_Load("resources/downtoright.png"));
+          case 'r': n->setBodyImage(IMG_Load("resources/uptoright.png"));
           break;
         }
       break;
