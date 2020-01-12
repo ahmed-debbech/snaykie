@@ -101,7 +101,7 @@ void snake :: update_nodes_num_on_map(node& n, const node& last_node){
 }
 void snake :: transformNode(node * n, int i){
   SDL_FreeSurface(n->getBodyImage());
-  if(i != 0){
+  if((i != 0) && (i != length-1)){
     if(n->getNextDirection() != n->getDirection()){
       switch(n->getDirection()){
         case 'u':
@@ -137,6 +137,15 @@ void snake :: transformNode(node * n, int i){
           }
         break;
       }
+      cout << "ta39ifa" << endl;
+    }else{
+      switch(n->getDirection()){
+          case 'u': n->setBodyImage(IMG_Load("resources/snake/bodyup.png")); break;
+          case 'd': n->setBodyImage(IMG_Load("resources/snake/bodydown.png")); break;
+          case 'l': n->setBodyImage(IMG_Load("resources/snake/bodyleft.png")); break;
+          case 'r': n->setBodyImage(IMG_Load("resources/snake/bodyright.png")); break;
+        }
+        cout << "body" << endl;
     }
   }else{
   if(i==0){ //this node is head
@@ -146,6 +155,7 @@ void snake :: transformNode(node * n, int i){
         case 'l': n->setBodyImage(IMG_Load("resources/snake/headleft.png")); break;
         case 'r': n->setBodyImage(IMG_Load("resources/snake/headright.png")); break;
       }
+      cout << "head" << endl;
     }else{
       if(i == length-1){ //this node is tail
         switch(n->getDirection()){
@@ -154,13 +164,7 @@ void snake :: transformNode(node * n, int i){
           case 'l': n->setBodyImage(IMG_Load("resources/snake/tailleft.png")); break;
           case 'r': n->setBodyImage(IMG_Load("resources/snake/tailright.png")); break;
         }
-      }else{
-        switch(n->getDirection()){
-          case 'u': n->setBodyImage(IMG_Load("resources/snake/bodyup.png")); break;
-          case 'd': n->setBodyImage(IMG_Load("resources/snake/bodydown.png")); break;
-          case 'l': n->setBodyImage(IMG_Load("resources/snake/bodyleft.png")); break;
-          case 'r': n->setBodyImage(IMG_Load("resources/snake/bodyright.png")); break;
-        }
+        cout << "tail "<< endl;
       }
     }
   }
@@ -297,9 +301,11 @@ void snake :: pushTailNode(){
 void snake :: addExtraBody(){
   node n,last;
   last=v[length-2];
+  n.setBodyImage(IMG_Load("resources/snake/bodyup.png")); //initialize with random data
   n.setNextDirection(last.getDirection());
   n.setDirection(last.getDirection());
   update_nodes_num_on_map(n, last);
+    transformNode(&n, length-2);    //then set images based on next node
   SDL_Rect pos = last.getPosition();
   switch(n.getDirection()){
     case 'u': pos.y = pos.y + 43;
