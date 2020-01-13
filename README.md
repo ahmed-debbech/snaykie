@@ -4,7 +4,7 @@ Snaykie uses [SDL](https://www.libsdl.org/) Library. \
 <B> This is a work in progress by Ahmed Debbech. </B>
 ### Project status
 Snaykie is still under development. \
-Latest version is: v0.3.1
+Latest version is: v0.4.0
 ### Installation
 * Compile from source: clone the repo in your desired directory and then a 'make' command in the 'src' directory will compile & execute from source. \
 Note: You should install [SDLv1.2](https://www.libsdl.org/download-1.2.php) in order to work properly.
