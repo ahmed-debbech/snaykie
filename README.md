@@ -8,7 +8,7 @@ Latest version is: v0.4.0
 ### Installation
 * Compile from source: clone the repo in your desired directory and then a 'make' command in the 'src' directory will compile & execute from source. \
 Note: You should install [SDLv1.2](https://www.libsdl.org/download-1.2.php) in order to work properly.
-* You can download the Windows binary from [here](http://bit.ly/2r5SvPa).
+* You can download the Windows binary from [here](http://bit.ly/3ajReq6).
 decompress the zip file and open the folder and execute 'snaykie.exe'
 ### Usage
 Open the app and then move the snake with arrows. That's it! \
@@ -21,7 +21,7 @@ No documentation is available yet as the project is still in progress and the AP
 ### Acknowlegment
 [Ahmed Debbech](https://twitter.com/AhmedDebb) : Developer & Designer\
 Contact at: debbech.ahmed@gmail.com \
-Special thanks to Mohamed Amine Ayadi for designing the menus of the game.
+Special thanks to Mohamed Amine Ayadi for designing the menus of the game and re-designing the snake.
 ### License
 This work is under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) License. \
 Copyright © 2019 Ahmed Debbech. \
